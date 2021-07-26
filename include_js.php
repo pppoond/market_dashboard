@@ -7,14 +7,16 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="./script.js"></script>
 <script>
-    new Chartist.Line('#traffic-chart', {
-        labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-        series: [
-            [23000, 25000, 19000, 34000, 56000, 64000]
-        ]
-    }, {
-        low: 0,
-        showArea: true
-    });
+    if (document.querySelector('#traffic-chart')) {
+        new Chartist.Line('#traffic-chart', {
+            labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+            series: [
+                [23000, 25000, 19000, 34000, 56000, 64000]
+            ]
+        }, {
+            low: 0,
+            showArea: true
+        });
+    }
 </script>
 <script src="./login.js"></script>

@@ -21,4 +21,8 @@ $(document).ready(function () {
         // console.log("/view_dashboard.php");
         window.location.href = "./view_dashboard.php";
     });
+    $("#buttonViewStores").on('click', function () {
+        // console.log("/view_stores.php");
+        window.location.href = "./view_stores.php";
+    });
 });
