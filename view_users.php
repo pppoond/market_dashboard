@@ -14,6 +14,11 @@ $title = "Users";
     <?php
     include_once "./include_css.php";
     ?>
+    <style>
+        .cursor-poiter {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,12 +37,12 @@ $title = "Users";
                         <li class="breadcrumb-item active" aria-current="page">Overview</li>
                     </ol>
                 </nav>
-                <h1 class="h2">Users</h1>
-                <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
+                <h1 class="h2">ผู้ใช้งาน</h1>
+                <p>จัดการผู้ใช้งาน</p>
                 <div class="row my-4">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
                         <div class="card">
-                            <h5 class="card-header">Admins</h5>
+                            <h5 class="card-header">ผู้ดูแล</h5>
                             <div class="card-body">
                                 <h5 class="card-title">345k</h5>
                                 <p class="card-text">Feb 1 - Apr 1, United States</p>
@@ -47,7 +52,7 @@ $title = "Users";
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
                         <div class="card">
-                            <h5 class="card-header">Stores</h5>
+                            <h5 class="card-header">ร้าน</h5>
                             <div class="card-body">
                                 <h5 class="card-title">3 คน</h5>
                                 <p class="card-text">Feb 1 - Apr 1, United States</p>
@@ -57,7 +62,7 @@ $title = "Users";
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
                         <div class="card">
-                            <h5 class="card-header">Riders</h5>
+                            <h5 class="card-header">ไรเดอร์</h5>
                             <div class="card-body">
                                 <h5 class="card-title">10 คน</h5>
                                 <p class="card-text">Feb 1 - Apr 1, United States</p>
@@ -66,8 +71,8 @@ $title = "Users";
                         </div>
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                        <div class="card">
-                            <h5 class="card-header">Customer</h5>
+                        <div class="card cursor-poiter" id="buttonViewUsersCustomer">
+                            <h5 class="card-header">ลูกค้า</h5>
                             <div class="card-body">
                                 <h5 class="card-title">89 คน</h5>
                                 <p class="card-text">Feb 1 - Apr 1, United States</p>
