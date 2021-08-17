@@ -51,3 +51,37 @@ function open_modal_edit(index, customer_id) {
     $("#input_customer_sex").val(data[index].sex);
     id_customer = customer_id;
 }
+
+function validate_update() {
+
+}
+
+function update_customer() {
+    console.log(id_customer);
+    // $.ajax({
+    //     type: "POST",
+    //     dataType: "JSON",
+    //     url: "./functions/update_customers.php",
+    //     data: {
+    //         customer_id: $("#txt_create_name").val(),
+    //         username: $("#txt_create_name").val(),
+    //         password: $("#txt_create_name").val(),
+    //         customer_name: $("#txt_create_name").val(),
+    //         customer_phone: $("#txt_create_name").val(),
+    //         sex: $("#txt_create_name").val()
+    //     }, success: function (response) {
+    //         console.log("good", response);
+    //         if (response.result[0].code == 200) {
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Create success',
+    //                 text: 'Create movie successfully'
+    //             });
+    //             $(".modal").css("display", 'none');
+    //             render();
+    //         }
+    //     }, error: function (err) {
+    //         console.log("bad", err);
+    //     }
+    // })
+}
