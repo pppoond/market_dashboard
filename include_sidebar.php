@@ -27,7 +27,7 @@
                     <span class="ml-2">Orders</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link <?php
                                     if ($title == "Stores") {
                                         echo "active";
@@ -40,7 +40,7 @@
                     </svg>
                     <span class="ml-2">Stores</span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link <?php
                                     if ($title == "Users") {

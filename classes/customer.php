@@ -14,13 +14,15 @@ class Customer extends Database
             return $result;
         };
     }
-    public function add($name, $category)
-    {
-        $sql = "INSERT INTO {$this->tableName} (name,category) VALUES(:name,:category)";
+    public function add(
+        $username,
+        $password,
+        $customerName,
+        $customerPhone
+    ) {
+        $sql = "INSERT INTO {$this->tableName} (username,password,customer_name,customer_phone) VALUES(?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-        $stmt->bindParam(':category', $category, PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->execute([$username, $password, $customerName, $customerPhone]);
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
@@ -42,6 +44,24 @@ class Customer extends Database
         $sql = "SELECT * FROM customer WHERE customer_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$customer_id]);
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+    public function findByUsername($username)
+    {
+        $sql = "SELECT * FROM customer WHERE username = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$username]);
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+    public function loginCustomer($username, $password)
+    {
+        $sql = "SELECT * FROM customer WHERE username = ? AND password = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$username, $password]);
         while ($result = $stmt->fetchAll()) {
             return $result;
         };

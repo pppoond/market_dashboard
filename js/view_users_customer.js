@@ -13,7 +13,7 @@ function renderCustomer() {
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: "./functions/customers.php",
+        url: "./api/customers.php",
         data: {},
         success: function (response) {
             // console.log("good", response);
@@ -28,8 +28,7 @@ function renderCustomer() {
                          <td>${data[i].customer_name}</td>
                          <td>${data[i].customer_phone}</td>
                          <td>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                            <a href="./view_users_customer_edit.php" class="btn btn-sm btn-warning">Edit</a>
+                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
                             <button onclick="open_modal_edit(${i}, ${data[i].customer_id})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">View</button>
                         </td>
                     </tr>
