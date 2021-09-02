@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $data_items = array(
                 "customer_id" => (int)$customer_id,
                 "username" => $username,
-                // "password" => $password,
+                "password" => $password,
                 "customer_name" => $customer_name,
                 "customer_phone" => $customer_phone,
                 "profile_image" => $profile_image,
@@ -84,6 +84,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     echo json_encode($data_arr, JSON_UNESCAPED_UNICODE);
     http_response_code(200);
     exit();
+}
+if ($_SERVER['REQUEST_METHOD'] == "PUT") {
+    $customer_id = $_REQUEST['customer_id'];
+    $username = $_REQUEST['username'];
+    $password = $_REQUEST['password'];
+    $customer_name = $_REQUEST['customer_name'];
+    $customer_phone = $_REQUEST['customer_phone'];
+    $sex = $_REQUEST['sex'];
+    $customer = new Customer();
+    $customer->update(
+        $customer_id,
+        $username,
+        $password,
+        $customer_name,
+        $customer_phone,
+        $sex
+    );
 } else {
     http_response_code(405);
 }

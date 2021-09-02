@@ -20,17 +20,19 @@ class Customer extends Database
         $customerName,
         $customerPhone
     ) {
+        $md5Password = md5($password);
         $sql = "INSERT INTO {$this->tableName} (username,password,customer_name,customer_phone) VALUES(?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $password, $customerName, $customerPhone]);
+        $stmt->execute([$username, $md5Password, $customerName, $customerPhone]);
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
     public function update($customer_id, $username, $password, $customer_name, $customer_phone, $sex)
     {
-        $sql = "UPDATE customer SET username= ? ,password= ? ,customer_name= ? ,customer_phone = ? ,sex = ?";
+        $md5Password = md5($password);
+        $sql = "UPDATE customer SET username= ? ,password= ? ,customer_name= ? ,customer_phone = ? ,sex = ? WHERE customer_id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $password, $customer_name, $customer_phone, $sex]);
+        $stmt->execute([$username, $md5Password, $customer_name, $customer_phone, $sex, $customer_id]);
         return $customer_id;
     }
     public function delete($customer_id)
@@ -59,9 +61,10 @@ class Customer extends Database
     }
     public function loginCustomer($username, $password)
     {
+        $md5Password = md5($password);
         $sql = "SELECT * FROM customer WHERE username = ? AND password = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $password]);
+        $stmt->execute([$username, $md5Password]);
         while ($result = $stmt->fetchAll()) {
             return $result;
         };
