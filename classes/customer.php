@@ -27,12 +27,19 @@ class Customer extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($customer_id, $username, $password, $customer_name, $customer_phone, $sex)
+    public function update($customer_id, $username, $password, $customer_name, $customer_phone,$profile_image, $sex)
     {
         $md5Password = md5($password);
-        $sql = "UPDATE customer SET username= ? ,password= ? ,customer_name= ? ,customer_phone = ? ,sex = ? WHERE customer_id = ?";
+        $sql = "UPDATE customer SET password= :password ,customer_name= :customer_name ,customer_phone = :customer_phone ,profile_image = :profile_image ,sex = :sex WHERE customer_id = :customer_id";
+
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $md5Password, $customer_name, $customer_phone, $sex, $customer_id]);
+        $stmt->bindParam(':password', $md5Password, PDO::PARAM_STR);
+        $stmt->bindParam(':customer_name', $customer_name, PDO::PARAM_STR);
+        $stmt->bindParam(':customer_phone', $customer_phone, PDO::PARAM_STR);
+        $stmt->bindParam(':profile_image', $profile_image, PDO::PARAM_STR);
+        $stmt->bindParam(':sex', $sex, PDO::PARAM_INT);
+        $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_INT);
+        $stmt->execute();
         return $customer_id;
     }
     public function delete($customer_id)

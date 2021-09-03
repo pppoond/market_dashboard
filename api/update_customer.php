@@ -2,35 +2,48 @@
 header('Content-Type: application/json;charset=utf-8');
 require '../classes/customer.php';
 
-if ($_SERVER['REQUEST_METHOD'] == "GET") {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $customer_id = $_REQUEST['customer_id'];
+    $username = $_REQUEST['username'];
+    $password = $_REQUEST['password'];
+    $customer_name = $_REQUEST['customer_name'];
+    $customer_phone = $_REQUEST['customer_phone'];
+    $profile_image = $_REQUEST['profile_image'];
+    $sex = $_REQUEST['sex'];
     $customer = new Customer();
-    $data_arr = array();
-    $data_arr['result'] = array();
-
-    $results = $customer->customers();
-    foreach ($results as $result) {
-        $customer_id = $result['customer_id'];
-        $username = $result['username'];
-        $password = $result['password'];
-        $customer_name = $result['customer_name'];
-        $customer_phone = $result['customer_phone'];
-        $sex = $result['sex'];
-        $profile_image = $result['profile_image'];
-        $time_reg = $result['time_reg'];
-        $data_items = array(
-            "customer_id" => (int)$customer_id,
-            "username" => $username,
-            "password" => $password,
-            "customer_name" => $customer_name,
-            "customer_phone" => $customer_phone,
-            "sex" => $sex,
-            "time_reg" => $time_reg,
+    if (isset($_REQUEST['customer_id'])) {
+        $updateReturn =  $customer->update(
+            $customer_id,
+            $username,
+            $password,
+            $customer_name,
+            $customer_phone,
+            $profile_image,
+            $sex
         );
-        array_push($data_arr['result'], $data_items);
+        $lastId = [
+            "customer_id" => (int)$updateReturn
+        ];
+
+        $result = [
+            'msg' => "success",
+            'status' => 200,
+            'result' => $lastId,
+        ];
+
+        echo json_encode($result);
+        http_response_code(200);
+        exit();
+    } else {
+        $result = [
+            'msg' => "unsuccess",
+            'status' => 200,
+            // 'result' => null,
+        ];
+        echo json_encode($result);
+        http_response_code(200);
+        exit();
     }
-    echo json_encode($data_arr, JSON_UNESCAPED_UNICODE);
-    http_response_code(200);
-    exit();
 } else {
     http_response_code(405);
 }
