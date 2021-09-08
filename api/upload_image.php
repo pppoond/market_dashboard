@@ -23,7 +23,7 @@ if(!$_FILES["file"]["error"])
         $response->message = "File uploading failed";
     }    
 } 
-else
+else 
 {
     $response->status = false;
     $response->message = "File uploading failed";
