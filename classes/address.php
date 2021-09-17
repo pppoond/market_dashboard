@@ -50,6 +50,16 @@ class Address extends Database
         $stmt->execute();
         return $address_id;
     }
+    public function updateAddrStatus($post_address_id, $post_addr_status)
+    {
+        $sql = "UPDATE {$this->tableName} SET addr_status = :addr_status WHERE address_id = :address_id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':address_id', $post_address_id, PDO::PARAM_INT);
+        $stmt->bindParam(':addr_status', $post_addr_status, PDO::PARAM_INT);
+        $stmt->execute();
+        return $post_address_id;
+    }
     public function delete($address_id)
     {
         $sql = "DELETE FROM {$this->tableName} WHERE address_id = ?";

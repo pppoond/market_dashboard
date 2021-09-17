@@ -2,10 +2,10 @@
 
 require_once '../classes/database.php';
 
-class Product extends Database
+class ProductImage extends Database
 {
-    protected $tableName = 'products';
-    public function products()
+    protected $tableName = 'product_images';
+    public function product_images()
     {
         $sql = "SELECT * FROM {$this->tableName}";
         $stmt = $this->conn->prepare($sql);
@@ -30,20 +30,15 @@ class Product extends Database
     public function delete()
     {
     }
-    public function findById($productId)
+    public function findById($product_imagesId)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE product_id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$productId]);
-        while ($result = $stmt->fetchAll()) {
-            return $result;
-        };
     }
-    public function findByStoreId($storeId)
+    public function findByProductId($product_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE product_id = :product_id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$storeId]);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_STR);
+        $stmt->execute();
         while ($result = $stmt->fetchAll()) {
             return $result;
         };
