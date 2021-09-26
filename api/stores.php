@@ -19,9 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $wallet = $result['wallet'];
             $lat = $result['lat'];
             $lng = $result['lng'];
+            $status = $result['status'];
             $time_reg = $result['time_reg'];
             $data_items = array(
-                "store_id" => (int)$store_id,
+                "store_id" => $store_id,
                 "username" => $username,
                 "password" => $password,
                 "store_name" => $store_name,
@@ -30,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "wallet" => $wallet,
                 "lat" => (float)$lat,
                 "lng" => (float)$lng,
+                "status" => (int)$status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -46,9 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $wallet = $result['wallet'];
             $lat = $result['lat'];
             $lng = $result['lng'];
+            $status = $result['status'];
             $time_reg = $result['time_reg'];
             $data_items = array(
-                "store_id" => (int)$store_id,
+                "store_id" => $store_id,
                 "username" => $username,
                 "password" => $password,
                 "store_name" => $store_name,
@@ -57,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "wallet" => $wallet,
                 "lat" => (float)$lat,
                 "lng" => (float)$lng,
+                "status" => (int)$status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -73,9 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $wallet = $result['wallet'];
             $lat = $result['lat'];
             $lng = $result['lng'];
+            $status = $result['status'];
             $time_reg = $result['time_reg'];
             $data_items = array(
-                "store_id" => (int)$store_id,
+                "store_id" => $store_id,
                 "username" => $username,
                 "password" => $password,
                 "store_name" => $store_name,
@@ -84,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "wallet" => $wallet,
                 "lat" => (float)$lat,
                 "lng" => (float)$lng,
+                "status" => (int)$status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);

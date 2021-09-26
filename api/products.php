@@ -131,6 +131,38 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     echo json_encode($data_arr, JSON_UNESCAPED_UNICODE);
     http_response_code(200);
     exit();
+} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    $store_id = $_POST['store_id'];
+    $category_id = $_POST['category_id'];
+    $product_name = $_POST['product_name'];
+    $product_detail = $_POST['product_detail'];
+    if (isset($store_id) && isset($category_id) && isset($product_name) && isset($product_detail)) {
+        $product = new Product();
+        $result = $product->add($store_id, $category_id, $product_name, $product_detail);
+
+        $lastId = [
+            "product_id" => $result
+        ];
+
+        $result = [
+            'msg' => "success",
+            'status' => 200,
+            'result' => $lastId,
+        ];
+
+        echo json_encode($result);
+        http_response_code(200);
+        exit();
+    } else {
+        $result = [
+            'msg' => "unsuccess",
+            'status' => 200,
+        ];
+        echo json_encode($result);
+        http_response_code(200);
+        exit();
+    }
 } else {
     http_response_code(405);
 }

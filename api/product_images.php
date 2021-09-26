@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $productImage = new ProductImage();
     if (isset($_GET['findid'])) {
         $pro_img_id = $_GET['findid'];
-        $product_images['result'] = array();
         $in_results = $productImage->findById($pro_img_id);
         foreach ($in_results as $in_result) {
             $pro_img_id = $in_result['pro_img_id'];
@@ -23,9 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             );
             array_push($product_images['result'], $in_data_items);
         }
-        echo json_encode($result);
-        http_response_code(200);
-        exit();
     } else if (isset($_GET['delete'])) {
         $pro_img_id = $_GET['delete'];
         $result = $productImage->delete($pro_img_id);
@@ -73,9 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if (isset($product_id) && isset($pro_img_addr)) {
         $product_image = new ProductImage();
         $result = $product_image->add($product_id, $pro_img_addr);
-        $lastId = [
+        $lastId = array(
             "pro_img_id" => (int)$result
-        ];
+        );
 
         $result = [
             'msg' => "success",
