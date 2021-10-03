@@ -28,7 +28,7 @@ function renderCustomer() {
                          <td>${data[i].customer_name}</td>
                          <td>${data[i].customer_phone}</td>
                          <td>
-                            <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                            <button onclick="confirm_delete(${data[i].customer_id})" type="button" class="btn btn-sm btn-danger">Delete</button>
                             <button onclick="open_modal_edit(${i}, ${data[i].customer_id})" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">View</button>
                         </td>
                     </tr>
@@ -51,8 +51,52 @@ function open_modal_edit(index, customer_id) {
     id_customer = customer_id;
 }
 
+function confirm_delete(customer_id) {
+    // console.log("SSSSSS");
+    swal({
+        title: "คำเตือน!",
+        text: "คุณต้องการลบหรือไม่?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                console.log(customer_id);
+                deleteCustomer(customer_id);
+            } else {
+                swal("ยกเลิกแล้ว!");
+            }
+        });
+}
 function validate_update() {
 
+}
+
+function deleteCustomer(customer_id) {
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: "./api/delete_customer.php",
+        data: {
+            'customer_id': customer_id,
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.msg == 'success') {
+                swal("ลบสำเร็จ!", {
+                    icon: "success",
+                });
+            } else {
+                swal("มีข้อผิดพลาด!", {
+                    icon: "error",
+                });
+            }
+            renderCustomer();
+        }, error: function (err) {
+            console.log("bad", err);
+        }
+    });
 }
 
 function update_customer() {

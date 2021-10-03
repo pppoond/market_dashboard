@@ -27,7 +27,7 @@ class Customer extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($customer_id, $username, $password, $customer_name, $customer_phone,$profile_image, $sex)
+    public function update($customer_id, $username, $password, $customer_name, $customer_phone, $profile_image, $sex)
     {
         $md5Password = md5($password);
         $sql = "UPDATE customer SET password= :password ,customer_name= :customer_name ,customer_phone = :customer_phone ,profile_image = :profile_image ,sex = :sex WHERE customer_id = :customer_id";
@@ -47,6 +47,7 @@ class Customer extends Database
         $sql = "DELETE FROM customer WHERE customer_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$customer_id]);
+        return $customer_id;
     }
     public function findById($customer_id)
     {
