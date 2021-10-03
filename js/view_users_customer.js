@@ -82,7 +82,7 @@ function deleteCustomer(customer_id) {
             'customer_id': customer_id,
         },
         success: function (response) {
-            console.log(response);
+            // console.log(response);
             if (response.msg == 'success') {
                 swal("ลบสำเร็จ!", {
                     icon: "success",
