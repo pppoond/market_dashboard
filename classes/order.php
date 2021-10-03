@@ -2,13 +2,45 @@
 
 require_once '../classes/database.php';
 
-class Product extends Database
+class Order extends Database
 {
-    protected $tableName = 'products';
-    public function products()
+    protected $tableName = 'orders';
+    public function orders()
     {
         $sql = "SELECT * FROM {$this->tableName}";
         $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+
+    public function ordersByStore($store_id)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+
+    public function ordersByRider($rider_id)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+    public function ordersByCustomer($customer_id)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE customer_id = :customer_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {
             return $result;
@@ -53,7 +85,7 @@ class Product extends Database
     }
     public function findById($productId)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE product_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE order_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$productId]);
         while ($result = $stmt->fetchAll()) {
