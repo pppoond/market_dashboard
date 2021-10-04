@@ -129,7 +129,15 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         http_response_code(200);
         exit();
     }
-} else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
+} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $username = $_REQUEST['username'];
+    $password = $_REQUEST['password'];
+    $store_name = $_REQUEST['store_name'];
+    $store_phone = $_REQUEST['store_phone'];
+    // $profile_image = $_REQUEST['profile_image'];
+    // $wallet = $_REQUEST['wallet'];
+    // $lat = $_REQUEST['lat'];
+    // $lng = $_REQUEST['lng'];
 } else {
     $username = $_REQUEST['username'];
     $password = $_REQUEST['password'];

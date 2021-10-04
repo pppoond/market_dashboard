@@ -46,6 +46,15 @@ class Rider extends Database
             return $result;
         };
     }
+    public function findByUsername($username)
+    {
+        $sql = "SELECT * FROM rider WHERE username = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$username]);
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
     public function loginRider($username, $password)
     {
         $sql = "SELECT * FROM rider WHERE username = ? AND password = ?";

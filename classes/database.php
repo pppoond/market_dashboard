@@ -4,7 +4,7 @@ class Database {
     private $dbServer = 'localhost';
     private $dbUser = 'root';
     private $dbPassword = 'root';
-    private $dbName = 'taladsod2';
+    private $dbName = 'taladsod';
     protected $conn;
 
     public function __construct()

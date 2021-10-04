@@ -33,11 +33,11 @@
                         <form method="POST">
                             <div>
                                 <label class="mb-1" for="">ชื่อผู้ใช้</label>
-                                <input id="form_username" type="text" class="form-control" placeholder="ชื่อผู้ใช้">
+                                <input id="login_form_username" type="text" class="form-control" placeholder="ชื่อผู้ใช้">
                             </div>
                             <div class="mt-3">
                                 <label class="mb-1" for="">รหัสผ่าน</label>
-                                <input id="form_password" type="password" class="form-control" placeholder="รหัสผ่าน">
+                                <input id="login_form_password" type="password" class="form-control" placeholder="รหัสผ่าน">
                             </div>
                             <div class="d-flex justify-content-center">
                                 <a id="buttonLogin" class="btn btn-secondary mt-3">เข้าสู่ระบบ</a>
@@ -58,6 +58,52 @@
     <?php
     include_once "./include_js.php";
     ?>
+    <script>
+        $(document).ready(function() {
+
+            if (document.querySelector('#tbodystore')) {
+                renderstore();
+            }
+
+
+
+        });
+
+        function loginAdmin() {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "./api/add_store.php",
+                data: {
+                    'username': $("#login_form_username").val(),
+                    'password': $("#login_form_password").val(),
+                },
+                success: function(response) {
+                    if (response.msg == 'success') {
+                        renderstore();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'เข้าสู่ระบบสำเร็จ!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then((value) => {
+                            window.location.href = "./index.php";
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'รหัสผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
