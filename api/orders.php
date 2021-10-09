@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $order_date = $result['order_date'];
             $total = $result['total'];
             $cash_method = $result['cash_method'];
-            $status = $result['status'];
+            $order_status = $result['status'];
             $time_reg = $result['time_reg'];
 
             $store_item = array();
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $wallet = $result_store['wallet'];
                 $lat = $result_store['lat'];
                 $lng = $result_store['lng'];
-                $status = $result_store['status'];
+                $store_status = $result_store['status'];
                 $time_reg = $result_store['time_reg'];
                 $store_item = array(
                     "store_id" => $store_id,
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     "wallet" => $wallet,
                     "lat" => (float)$lat,
                     "lng" => (float)$lng,
-                    "status" => (int)$status,
+                    "status" => $store_status,
                     "time_reg" => $time_reg,
                 );
             }
@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "order_date" => $order_date,
                 "total" => $total,
                 "cash_method" => $cash_method,
-                "status" => $status,
+                "status" => $order_status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $order_date = $result['order_date'];
             $total = $result['total'];
             $cash_method = $result['cash_method'];
-            $status = $result['status'];
+            $order_status = $result['status'];
             $time_reg = $result['time_reg'];
 
             $store_item = array();
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $wallet = $result_store['wallet'];
                 $lat = $result_store['lat'];
                 $lng = $result_store['lng'];
-                $status = $result_store['status'];
+                $store_status = $result_store['status'];
                 $time_reg = $result_store['time_reg'];
                 $store_item = array(
                     "store_id" => $store_id,
@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     "wallet" => $wallet,
                     "lat" => (float)$lat,
                     "lng" => (float)$lng,
-                    "status" => (int)$status,
+                    "status" => $store_status,
                     "time_reg" => $time_reg,
                 );
             }
@@ -279,7 +279,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "order_date" => $order_date,
                 "total" => $total,
                 "cash_method" => $cash_method,
-                "status" => $status,
+                "status" => $order_status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -295,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $order_date = $result['order_date'];
             $total = $result['total'];
             $cash_method = $result['cash_method'];
-            $status = $result['status'];
+            $order_status = $result['status'];
             $time_reg = $result['time_reg'];
 
             $store_item = array();
@@ -310,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $wallet = $result_store['wallet'];
                 $lat = $result_store['lat'];
                 $lng = $result_store['lng'];
-                $status = $result_store['status'];
+                $store_status = $result_store['status'];
                 $time_reg = $result_store['time_reg'];
                 $store_item = array(
                     "store_id" => $store_id,
@@ -322,7 +322,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     "wallet" => $wallet,
                     "lat" => (float)$lat,
                     "lng" => (float)$lng,
-                    "status" => (int)$status,
+                    "status" => $store_status,
                     "time_reg" => $time_reg,
                 );
             }
@@ -413,7 +413,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "order_date" => $order_date,
                 "total" => $total,
                 "cash_method" => $cash_method,
-                "status" => $status,
+                "status" => $order_status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -429,7 +429,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $order_date = $result['order_date'];
             $total = $result['total'];
             $cash_method = $result['cash_method'];
-            $status = $result['status'];
+            $order_status = $result['status'];
             $time_reg = $result['time_reg'];
 
             $store_item = array();
@@ -444,7 +444,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $wallet = $result_store['wallet'];
                 $lat = $result_store['lat'];
                 $lng = $result_store['lng'];
-                $status = $result_store['status'];
+                $store_status = $result_store['status'];
                 $time_reg = $result_store['time_reg'];
                 $store_item = array(
                     "store_id" => $store_id,
@@ -456,7 +456,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     "wallet" => $wallet,
                     "lat" => (float)$lat,
                     "lng" => (float)$lng,
-                    "status" => (int)$status,
+                    "status" => $store_status,
                     "time_reg" => $time_reg,
                 );
             }
@@ -547,7 +547,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "order_date" => $order_date,
                 "total" => $total,
                 "cash_method" => $cash_method,
-                "status" => $status,
+                "status" => $order_status,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);

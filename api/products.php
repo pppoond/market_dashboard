@@ -192,9 +192,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $category_id = $_POST['category_id'];
     $product_name = $_POST['product_name'];
     $product_detail = $_POST['product_detail'];
+    $price = $_POST['price'];
+    $unit = $_POST['unit'];
     if (isset($store_id) && isset($category_id) && isset($product_name) && isset($product_detail)) {
         $product = new Product();
-        $result = $product->add($store_id, $category_id, $product_name, $product_detail);
+        $result = $product->add($store_id, $category_id, $product_name, $product_detail, $price, $unit);
 
         $lastId = [
             "product_id" => $result

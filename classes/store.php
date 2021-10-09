@@ -24,13 +24,38 @@ class Store extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($store_id, $username, $password, $store_name, $store_phone, $sex)
+    public function update($store_id, $username, $store_phone, $store_name, $profile_image)
+    {
+
+        $sql = "UPDATE {$this->tableName} SET username= :username ,store_phone = :store_phone ,store_name = :store_name ,profile_image = :profile_image WHERE store_id = :store_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':store_phone', $store_phone, PDO::PARAM_STR);
+        $stmt->bindParam(':store_name', $store_name, PDO::PARAM_STR);
+        $stmt->bindParam(':profile_image', $profile_image, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+
+        $stmt->execute();
+        return $store_id;
+    }
+    public function updatePassword($store_id, $password)
     {
         $md5Password = md5($password);
-
-        $sql = "UPDATE {$this->tableName} SET username= ? ,password= ? ,store_name= ? ,store_phone = ? ,sex = ?";
+        $sql = "UPDATE {$this->tableName} SET password = :password WHERE store_id = :store_id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $md5Password, $store_name, $store_phone, $sex]);
+        $stmt->bindParam(':password', $md5Password, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $store_id;
+    }
+    public function updateLatLng($store_id, $lat, $lng)
+    {
+        $sql = "UPDATE {$this->tableName} SET lat = :lat, lng = :lng WHERE store_id = :store_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':lat', $lat, PDO::PARAM_STR);
+        $stmt->bindParam(':lng', $lng, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->execute();
         return $store_id;
     }
     public function delete($store_id)

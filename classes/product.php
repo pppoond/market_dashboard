@@ -14,14 +14,16 @@ class Product extends Database
             return $result;
         };
     }
-    public function add($store_id, $category_id, $product_name, $product_detail)
+    public function add($store_id, $category_id, $product_name, $product_detail, $price, $unit)
     {
-        $sql = "INSERT INTO {$this->tableName} (store_id,category_id, product_name, product_detail) VALUES(:store_id,:category_id, :product_name, :product_detail)";
+        $sql = "INSERT INTO {$this->tableName} (store_id,category_id, product_name, product_detail,price,unit) VALUES(:store_id,:category_id, :product_name, :product_detail, :price, :unit)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
         $stmt->bindParam(':category_id', $category_id, PDO::PARAM_STR);
         $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
         $stmt->bindParam(':product_detail', $product_detail, PDO::PARAM_STR);
+        $stmt->bindParam(':price', $price, PDO::PARAM_STR);
+        $stmt->bindParam(':unit', $unit, PDO::PARAM_STR);
         $stmt->execute();
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
