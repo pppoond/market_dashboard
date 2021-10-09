@@ -1,4 +1,5 @@
 <?php
+include_once "./check_login.php";
 $title = "Dashboard";
 ?>
 

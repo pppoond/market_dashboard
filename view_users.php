@@ -1,4 +1,5 @@
 <?php
+include_once "./check_login.php";
 $title = "Users";
 ?>
 
@@ -41,7 +42,7 @@ $title = "Users";
                 <p>จัดการผู้ใช้งาน</p>
                 <div class="row my-4">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <div class="card">
+                        <div class="card cursor-poiter" id="buttonViewUsersAdmin">
                             <h5 class="card-header">ผู้ดูแล</h5>
                             <div class="card-body">
                                 <h5 id="admin_count" class="card-title">0 คน</h5>
@@ -71,7 +72,7 @@ $title = "Users";
                             <h5 class="card-header">ลูกค้า</h5>
                             <div class="card-body">
                                 <h5 id="customer_count" class="card-title">
-
+                                    0 คน
                                 </h5>
                             </div>
                         </div>
@@ -92,6 +93,7 @@ $title = "Users";
             getCustomer();
             getRider();
             getStores();
+            getAdmin();
 
             $("#buttonViewUsersCustomer").on('click', function() {
                 // console.log("/view_stores.php");
@@ -106,6 +108,11 @@ $title = "Users";
             $("#buttonViewUsersRider").on('click', function() {
                 // console.log("/view_stores.php");
                 window.location.href = "./view_users_rider.php";
+            });
+
+            $("#buttonViewUsersAdmin").on('click', function() {
+                // console.log("/view_stores.php");
+                window.location.href = "./view_users_admin.php";
             });
         });
 
@@ -134,6 +141,22 @@ $title = "Users";
                 success: function(response) {
                     console.log(response.result.length);
                     $("#rider_count").html(`${response.result.length} คน`);
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            });
+        }
+
+        function getAdmin() {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: "./api/admins.php",
+                data: {},
+                success: function(response) {
+                    console.log(response.result.length);
+                    $("#admin_count").html(`${response.result.length} คน`);
                 },
                 error: function(err) {
                     console.log("bad", err);

@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Content-Type: application/json;charset=utf-8');
 require '../classes/admin.php';
 
@@ -15,23 +16,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $username = $result['username'];
         $password = $result['password'];
         $admin_name = $result['admin_name'];
-        $admin_phone = $result['admin_phone'];
-        $sex = $result['sex'];
-        $profile_image = $result['profile_image'];
         $time_reg = $result['time_reg'];
         $data_items = array(
-            "admin_id" => (int)$admin_id,
+            "admin_id" => $admin_id,
             "username" => $username,
             "password" => $password,
             "admin_name" => $admin_name,
-            "admin_phone" => $admin_phone,
-            "sex" => $sex,
             "time_reg" => $time_reg,
         );
         array_push($data_arr['result'], $data_items);
     }
     // echo json_encode($data_arr, JSON_UNESCAPED_UNICODE);
     if ($admin_id != null) {
+
+        $_SESSION["admin_id"] = $admin_id;
+
         $success = array(
             'result' => [
                 'msg' => "success",

@@ -21,7 +21,7 @@
             <ul class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
-                <li class=""><a class="dropdown-item text-danger" id="signoutButton">Sign out</a></li>
+                <li class=""><a class="dropdown-item text-danger" href="./logout.php">Sign out</a></li>
             </ul>
         </div>
     </div>

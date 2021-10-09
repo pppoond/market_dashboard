@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,6 +68,11 @@
                 renderstore();
             }
 
+            $("#buttonLogin").on('click', function() {
+                console.log("Login");
+                loginAdmin();
+            });
+
 
 
         });
@@ -73,21 +81,22 @@
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
-                url: "./api/add_store.php",
+                url: "./api/login_admin.php",
                 data: {
                     'username': $("#login_form_username").val(),
                     'password': $("#login_form_password").val(),
                 },
                 success: function(response) {
-                    if (response.msg == 'success') {
-                        renderstore();
+                    console.log(response['result']['msg']);
+                    if (response['result']['msg'] == 'success') {
+
                         Swal.fire({
                             icon: 'success',
                             title: 'เข้าสู่ระบบสำเร็จ!',
                             showConfirmButton: false,
                             timer: 1500
                         }).then((value) => {
-                            window.location.href = "./index.php";
+                            window.location.href = "./";
                         });
                     } else {
                         Swal.fire({

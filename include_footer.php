@@ -1,14 +1,4 @@
-<footer class="footer pt-5 d-flex justify-content-between">
-    <span>Copyright © 2019-2020 <a href="https://themesberg.com">Themesberg</a></span>
-    <ul class="nav m-0">
-        <li class="nav-item">
-            <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Terms and conditions</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Contact</a>
-        </li>
-    </ul>
+<footer class="pt-3 pb-3 pl-3 pr-3 d-flex justify-content-between" style="position: fixed;bottom: 0;z-index: 300;background-color: #EAECEE;width: 100%;">
+    <span><a href="./">Themesberg</a></span>
+
 </footer>

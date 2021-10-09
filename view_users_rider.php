@@ -1,4 +1,5 @@
 <?php
+include_once "./check_login.php";
 $title = "Rider";
 ?>
 
@@ -229,7 +230,7 @@ $title = "Rider";
                          <td>
                             <button onclick="confirm_delete(${data[i].rider_id})" class="btn btn btn-danger">ลบ</button>
                            
-                            <button onclick="open_modal_edit(${i}, ${data[i].rider_id})" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">แก้ไข</button>
+                            <button onclick="open_modal_edit(${i}, ${data[i].rider_id})" class="btn btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">แก้ไข</button>
                             
                         </td>
                     </tr>

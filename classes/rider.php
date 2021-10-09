@@ -14,8 +14,9 @@ class Rider extends Database
             return $result;
         };
     }
-    public function add($name, $category)
+    public function add($name, $category, $password)
     {
+        $md5Password = md5($password);
         $sql = "INSERT INTO {$this->tableName} (name,category) VALUES(:name,:category)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -24,11 +25,26 @@ class Rider extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($rider_id, $username, $password, $rider_name, $rider_phone, $sex)
+    public function update($rider_id, $username, $password, $rider_phone, $rider_name, $sex, $profile_image)
     {
-        $sql = "UPDATE rider SET username= ? ,password= ? ,rider_name= ? ,rider_phone = ? ,sex = ?";
+        $md5Password = md5($password);
+        $sql = "UPDATE {$this->tableName} SET username= :username ,password= :password ,rider_phone = :rider_phone ,rider_name = :rider_name  ,sex = :sex ,profile_image = :profile_image WHERE rider_id = :rider_id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $password, $rider_name, $rider_phone, $sex]);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $md5Password, PDO::PARAM_STR);
+        $stmt->bindParam(':rider_phone', $rider_phone, PDO::PARAM_STR);
+        $stmt->bindParam(':rider_name', $rider_name, PDO::PARAM_STR);
+        $stmt->bindParam(':sex', $sex, PDO::PARAM_STR);
+        $stmt->bindParam(':profile_image', $profile_image, PDO::PARAM_STR);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $rider_id;
+    }
+    public function updateCreditWallet($rider_id, $credit, $wallet)
+    {
+        $sql = "UPDATE rider SET credit = ? ,wallet = ? WHERE rider_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$credit, $wallet, $rider_id]);
         return $rider_id;
     }
     public function delete($rider_id)
@@ -55,11 +71,21 @@ class Rider extends Database
             return $result;
         };
     }
+    public function findByRiderStatus($rider_status)
+    {
+        $sql = "SELECT * FROM rider WHERE rider_status = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$rider_status]);
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
     public function loginRider($username, $password)
     {
+        $md5Password = md5($password);
         $sql = "SELECT * FROM rider WHERE username = ? AND password = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $password]);
+        $stmt->execute([$username, $md5Password]);
         while ($result = $stmt->fetchAll()) {
             return $result;
         };

@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $credit = $result['credit'];
             $wallet = $result['wallet'];
             $profile_image = $result['profile_image'];
+            $lat = $result['lat'];
+            $lng = $result['lng'];
             $time_reg = $result['time_reg'];
             $data_items = array(
                 "rider_id" => $rider_id,
@@ -32,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "credit" => $credit,
                 "wallet" => $wallet,
                 "profile_image" => $profile_image,
+                "lat" => (float)$lat,
+                "lng" => (float)$lng,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -49,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $credit = $result['credit'];
             $wallet = $result['wallet'];
             $profile_image = $result['profile_image'];
+            $lat = $result['lat'];
+            $lng = $result['lng'];
             $time_reg = $result['time_reg'];
             $data_items = array(
                 "rider_id" => $rider_id,
@@ -61,6 +67,41 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "credit" => $credit,
                 "wallet" => $wallet,
                 "profile_image" => $profile_image,
+                "lat" => (float)$lat,
+                "lng" => (float)$lng,
+                "time_reg" => $time_reg,
+            );
+            array_push($data_arr['result'], $data_items);
+        }
+    } else if (isset($_GET['find_rider_status'])) {
+        $results = $rider->findByRiderStatus($_GET['find_rider_status']);
+        foreach ($results as $result) {
+            $rider_id = $result['rider_id'];
+            $username = $result['username'];
+            $password = $result['password'];
+            $rider_phone = $result['rider_phone'];
+            $rider_name = $result['rider_name'];
+            $sex = $result['sex'];
+            $rider_status = $result['rider_status'];
+            $credit = $result['credit'];
+            $wallet = $result['wallet'];
+            $profile_image = $result['profile_image'];
+            $lat = $result['lat'];
+            $lng = $result['lng'];
+            $time_reg = $result['time_reg'];
+            $data_items = array(
+                "rider_id" => $rider_id,
+                "username" => $username,
+                "password" => $password,
+                "rider_phone" => $rider_phone,
+                "rider_name" => $rider_name,
+                "sex" => $sex,
+                "rider_status" => $rider_status,
+                "credit" => $credit,
+                "wallet" => $wallet,
+                "profile_image" => $profile_image,
+                "lat" => (float)$lat,
+                "lng" => (float)$lng,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
@@ -78,6 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $credit = $result['credit'];
             $wallet = $result['wallet'];
             $profile_image = $result['profile_image'];
+            $lat = $result['lat'];
+            $lng = $result['lng'];
             $time_reg = $result['time_reg'];
             $data_items = array(
                 "rider_id" => $rider_id,
@@ -90,6 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "credit" => $credit,
                 "wallet" => $wallet,
                 "profile_image" => $profile_image,
+                "lat" => (float)$lat,
+                "lng" => (float)$lng,
                 "time_reg" => $time_reg,
             );
             array_push($data_arr['result'], $data_items);
