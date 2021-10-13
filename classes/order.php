@@ -17,7 +17,7 @@ class Order extends Database
 
     public function ordersByStore($store_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id";
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -28,7 +28,7 @@ class Order extends Database
 
     public function ordersByRider($rider_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id";
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id  ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -49,7 +49,7 @@ class Order extends Database
     }
     public function ordersByCustomer($customer_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE customer_id = :customer_id";
+        $sql = "SELECT * FROM {$this->tableName} WHERE customer_id = :customer_id  ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
         $stmt->execute();
@@ -57,13 +57,14 @@ class Order extends Database
             return $result;
         };
     }
-    public function add($store_id, $rider_id, $customer_id, $order_date, $total, $cash_method, $status)
+    public function add($store_id, $rider_id, $customer_id, $address_id, $order_date, $total, $cash_method, $status)
     {
-        $sql = "INSERT INTO {$this->tableName} (store_id, rider_id, customer_id, order_date,total,cash_method,status) VALUES(:store_id, :rider_id, :customer_id, :order_date,:total,:cash_method,:status)";
+        $sql = "INSERT INTO {$this->tableName} (store_id, rider_id, customer_id, address_id ,order_date,total,cash_method,status) VALUES(:store_id, :rider_id, :customer_id, :address_id, :order_date,:total,:cash_method,:status)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
         $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
         $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
+        $stmt->bindParam(':address_id', $address_id, PDO::PARAM_STR);
         $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
         $stmt->bindParam(':total', $total, PDO::PARAM_STR);
         $stmt->bindParam(':cash_method', $cash_method, PDO::PARAM_STR);
@@ -97,18 +98,18 @@ class Order extends Database
     public function delete()
     {
     }
-    public function findById($productId)
+    public function findById($order_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE order_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE order_id = ?  ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$productId]);
+        $stmt->execute([$order_id]);
         while ($result = $stmt->fetchAll()) {
             return $result;
         };
     }
     public function findByStoreId($storeId)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = ?  ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$storeId]);
         while ($result = $stmt->fetchAll()) {

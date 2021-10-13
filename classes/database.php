@@ -1,10 +1,10 @@
 <?php
 
 class Database {
-    private $dbServer = 'localhost';
-    private $dbUser = 'root';
-    private $dbPassword = 'root';
-    private $dbName = 'taladsod';
+    private $dbServer = '202.28.34.205';
+    private $dbUser = '61011211041';
+    private $dbPassword = '610112110411234';
+    private $dbName = '61011211041';
     protected $conn;
 
     public function __construct()

@@ -48,6 +48,15 @@ class Store extends Database
         $stmt->execute();
         return $store_id;
     }
+    public function updateStatus($store_id, $store_status)
+    {
+        $sql = "UPDATE {$this->tableName} SET status = :status WHERE store_id = :store_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':status', $store_status, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $store_id;
+    }
     public function updateLatLng($store_id, $lat, $lng)
     {
         $sql = "UPDATE {$this->tableName} SET lat = :lat, lng = :lng WHERE store_id = :store_id";
