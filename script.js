@@ -25,4 +25,8 @@ $(document).ready(function () {
         // console.log("/view_stores.php");
         window.location.href = "./view_stores.php";
     });
+    $("#buttonViewPayments").on('click', function () {
+        // console.log("/view_stores.php");
+        window.location.href = "./view_payments.php";
+    });
 });

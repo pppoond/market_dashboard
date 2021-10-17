@@ -95,8 +95,12 @@ class Order extends Database
         $stmt->execute();
         return $order_id;
     }
-    public function delete()
+    public function delete($order_id)
     {
+        $sql = "DELETE FROM {$this->tableName} WHERE order_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$order_id]);
+        return $order_id;
     }
     public function findById($order_id)
     {

@@ -37,8 +37,12 @@ class OrderDetail extends Database
         $stmt->execute();
         return $product_id;
     }
-    public function delete()
+    public function deleteByOrderId($order_id)
     {
+        $sql = "DELETE FROM {$this->tableName} WHERE order_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$order_id]);
+        return $order_id;
     }
     public function findById($order_detail_id)
     {
