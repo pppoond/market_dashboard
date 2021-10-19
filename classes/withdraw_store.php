@@ -23,19 +23,19 @@ class WithdrawStore extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($withdraw_store_id, $username, $withdraw_store_phone, $withdraw_store_name, $profile_image)
+    public function update($wd_store_id, $store_id, $total, $bank_name, $no_bank_account)
     {
 
-        $sql = "UPDATE {$this->tableName} SET username= :username ,withdraw_store_phone = :withdraw_store_phone ,withdraw_store_name = :withdraw_store_name ,profile_image = :profile_image WHERE withdraw_store_id = :withdraw_store_id";
+        $sql = "UPDATE {$this->tableName} SET store_id = :store_id ,total = :total ,bank_name = :bank_name ,no_bank_account = :no_bank_account WHERE wd_store_id = :wd_store_id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':withdraw_store_phone', $withdraw_store_phone, PDO::PARAM_STR);
-        $stmt->bindParam(':withdraw_store_name', $withdraw_store_name, PDO::PARAM_STR);
-        $stmt->bindParam(':profile_image', $profile_image, PDO::PARAM_STR);
-        $stmt->bindParam(':withdraw_store_id', $withdraw_store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':total', $total, PDO::PARAM_STR);
+        $stmt->bindParam(':bank_name', $bank_name, PDO::PARAM_STR);
+        $stmt->bindParam(':no_bank_account', $no_bank_account, PDO::PARAM_STR);
+        $stmt->bindParam(':wd_store_id', $wd_store_id, PDO::PARAM_STR);
 
         $stmt->execute();
-        return $withdraw_store_id;
+        return $wd_store_id;
     }
     public function updatePayStatus($wd_store_id, $pay_status)
     {

@@ -73,17 +73,22 @@ class Order extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($product_id, $category_id, $product_name, $product_detail)
+    public function update($order_id, $store_id, $rider_id, $customer_id, $address_id, $order_date, $total, $cash_method, $order_status)
     {
-        $sql = "UPDATE {$this->tableName} SET category_id= :category_id ,product_name= :product_name ,product_detail = :product_detail WHERE product_id = :product_id";
+        $sql = "UPDATE {$this->tableName} SET store_id= :store_id ,rider_id= :rider_id ,customer_id = :customer_id ,address_id = :address_id ,order_date = :order_date ,total = :total ,cash_method = :cash_method ,status = :order_status WHERE order_id = :order_id";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_STR);
-        $stmt->bindParam(':category_id', $category_id, PDO::PARAM_STR);
-        $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
-        $stmt->bindParam(':product_detail', $product_detail, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
+        $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_STR);
+        $stmt->bindParam(':address_id', $address_id, PDO::PARAM_STR);
+        $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
+        $stmt->bindParam(':total', $total, PDO::PARAM_STR);
+        $stmt->bindParam(':cash_method', $cash_method, PDO::PARAM_STR);
+        $stmt->bindParam(':order_status', $order_status, PDO::PARAM_STR);
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_STR);
         $stmt->execute();
-        return $product_id;
+        return $order_id;
     }
     public function updateStatus($order_id, $order_status)
     {

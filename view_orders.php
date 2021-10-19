@@ -20,6 +20,7 @@ $title = "Orders";
             cursor: pointer;
         }
     </style>
+
 </head>
 
 <body>
@@ -316,6 +317,112 @@ $title = "Orders";
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenterOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterOrderTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">แก้ไข</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="pb-3">
+                        <label for="input_order_order_id">ORDER_ID</label>
+                        <input type="text" class="form-control" id="input_order_order_id" disabled>
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_store_id">STORE_ID</label>
+                        <input type="text" class="form-control" id="input_order_store_id">
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_rider_id">RIDER_ID</label>
+                        <input type="text" class="form-control" id="input_order_rider_id">
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_customer_id">CUSTOMER_ID</label>
+                        <input type="text" class="form-control" id="input_order_customer_id">
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_address_id">ADDRESS_ID</label>
+                        <input type="text" class="form-control" id="input_order_address_id">
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_order_date">ORDER_DATE</label>
+                        <input type="text" class="form-control" id="input_order_order_date">
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_total">TOTAL</label>
+                        <input type="text" class="form-control" id="input_order_total">
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_cash_method">สถานะ</label>
+                        <select class="custom-select custom-select-sm" id="input_order_cash_method">
+                            <option value="1">
+                                <p class="text-danger">เงินสด</p>
+                            </option>
+                            <option value="2">
+                                <p class="text-warning">พร้อมเพย์</p>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_status">สถานะ</label>
+                        <select class="custom-select custom-select-sm" id="input_order_status">
+                            <option value="0">
+                                <p class="text-danger">รอยืนยันคำสั่งซื้อ</p>
+                            </option>
+                            <option value="1">
+                                <p class="text-warning">กำลังเตรียมสินค้า</p>
+                            </option>
+                            <option value="2">
+                                <p class="text-warning">กำลังไปส่งสินค้า</p>
+                            </option>
+                            <option value="3">
+                                <p class="text-primary">ถึงแล้ว</p>
+                            </option>
+                            <option value="4">
+                                <p class="text-success">ได้รับสินค้าแล้ว</p>
+                            </option>
+                            <option value="5">
+                                <p class="text-muted">ยกเลิก</p>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="pb-3">
+                        <label for="input_order_time_reg">TIME_REG</label>
+                        <input type="text" class="form-control" id="input_order_time_reg" disabled>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button onclick="confirmUpdateOrder()" type="button" class="btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenterDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterOrderDetail" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียด</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="detail_body"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button onclick="confirmUpdateOrder()" type="button" class="btn btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     include_once "./include_js.php";
     ?>
@@ -345,17 +452,29 @@ $title = "Orders";
                         var status = '';
                         var cash = '';
                         if (data[i].status == '0') {
-                            status = '<p class="text-danger">รอยืนยันคำสั่งซื้อ</p>';
+                            status = `
+                            <p class="text-danger">รอยืนยันคำสั่งซื้อ</p>
+                            `;
                         } else if (data[i].status == '1') {
-                            status = '<p class="text-warning">กำลังเตรียมสินค้า</p>';
+                            status = `
+                            <p class="text-warning">กำลังเตรียมสินค้า</p>
+                            `;
                         } else if (data[i].status == '2') {
-                            status = '<p class="text-warning">กำลังไปส่งสินค้า</p>';
+                            status = `
+                            <p class="text-warning">กำลังไปส่งสินค้า</p>
+                            `;
                         } else if (data[i].status == '3') {
-                            status = '<p class="text-primary">ถึงแล้ว</p>';
+                            status = `
+                            <p class="text-primary">ถึงแล้ว</p>
+                            `;
                         } else if (data[i].status == '4') {
-                            status = '<p class="text-success">ได้รับสินค้าแล้ว</p>';
+                            status = `
+                            <p class="text-success">ได้รับสินค้าแล้ว</p>
+                            `;
                         } else {
-                            status = '<p class="text-muted">ยกเลิก</p>';
+                            status = `
+                            <p class="text-muted">ยกเลิก</p>
+                            `;
                         }
 
                         if (data[i].cash_method == '1') {
@@ -377,9 +496,8 @@ $title = "Orders";
                          <td>${status}</td>
                          <td>
                             <button onclick="confirm_delete(${data[i].order_id})" class="btn btn btn-danger">ลบ</button>
-                            <button onclick="open_modal_edit(${i}, ${data[i].order_id})" class="btn btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">แก้ไข</button>
-                            <button onclick="open_modal_edit(${i}, ${data[i].order_id})" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenterRider">รายละเอียด</button>
-                            
+                            <button onclick="open_modal_edit(${i}, ${data[i].order_id})" class="btn btn btn-warning" data-toggle="modal" data-target="#exampleModalCenterOrder">แก้ไข</button>
+                            <button onclick="open_modal_detail(${data[i].order_id})" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenterDetail">รายละเอียด</button>
                         </td>
                     </tr>
                 `
@@ -449,6 +567,29 @@ $title = "Orders";
             address_id = address_id;
         }
 
+        var order_id;
+
+        function open_modal_edit(index, order_id) {
+            console.log(order_id);
+            $("#input_order_order_id").val(data[index].order_id);
+            $("#input_order_store_id").val(data[index].store_id.store_id);
+            $("#input_order_rider_id").val(data[index].rider_id.rider_id);
+            $("#input_order_customer_id").val(data[index].customer_id.customer_id);
+            $("#input_order_address_id").val(data[index].address_id.address_id);
+            $("#input_order_order_date").val(data[index].order_date);
+            $("#input_order_total").val(data[index].total);
+            $("#input_order_cash_method").val(data[index].cash_method).prop('selected', true);
+            $("#input_order_status").val(data[index].status).prop('selected', true);
+            $("#input_order_time_reg").val(data[index].time_reg);
+            order_id = data[index].order_id;
+        }
+
+        function open_modal_detail(order_id) {
+            console.log(order_id);
+            $("#detail_body").html(`<h6>Loading...</6>`);
+            orderDetailByOrderId(order_id);
+        }
+
         function confirm_delete(order_id) {
             // console.log("SSSSSS");
             swal({
@@ -492,6 +633,106 @@ $title = "Orders";
                 }
             });
         }
+
+        function confirmUpdateOrder() {
+            console.log($("#input_order_order_id").val());
+            if (
+                $("#input_order_order_id").val() != '' &&
+                $("#input_order_store_id").val() != '' &&
+                $("#input_order_rider_id").val() != '' &&
+                $("#input_order_customer_id").val() != '' &&
+                $("#input_order_address_id").val() != ''
+            ) {
+                Swal.fire({
+                    title: 'คุณต้องการบันทึกหรือไม่?',
+                    text: "หากไม่ต้องการ กรุณากดยกเลิก!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#D5D8DC',
+                    confirmButtonText: 'บันทึก',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        updateOrder();
+                    }
+                })
+            }
+
+        }
+
+        function updateOrder() {
+            console.log($("#input_order_order_id").val());
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "./api/update_order.php",
+                data: {
+                    'order_id': $("#input_order_order_id").val(),
+                    'store_id': $("#input_order_store_id").val(),
+                    'rider_id': $("#input_order_rider_id").val(),
+                    'customer_id': $("#input_order_customer_id").val(),
+                    'address_id': $("#input_order_address_id").val(),
+                    'order_date': $("#input_order_order_date").val(),
+                    'total': $("#input_order_total").val(),
+                    'cash_method': $("#input_order_cash_method").val(),
+                    'order_status': $("#input_order_status").val()
+                },
+                success: function(response) {
+                    console.log(response.msg);
+                    if (response.msg == 'success') {
+                        renderOrder();
+                        swal("บันทึกสำเร็จ!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("มีข้อผิดพลาด!", {
+                            icon: "error",
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            })
+        }
+
+        function orderDetailByOrderId(order_id) {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: `./api/order_details.php?order_id=${order_id}`,
+                success: function(response) {
+                    var html = ``;
+                    var detail = ``;
+                    var total = 0;
+                    console.log(response);
+                    response.result.forEach(element => {
+                        detail += `
+                        <p>${element.order_detail_id} ${element.product_id.product_name} ${element.product_id.price}฿ x ${element.quantity} = ${element.quantity * element.product_id.price}฿</p>
+                        `;
+                        total += element.quantity * element.product_id.price;
+                    });
+                    html = `
+                    <h3>${response.result[0].order_id.store_id.store_name}</h3>
+                    ${detail}
+                    <p>รวม ${total}</p>
+                    `;
+                    $("#detail_body").html(html);
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            })
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+            $("#input_order_order_date").datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
     </script>
 </body>
 

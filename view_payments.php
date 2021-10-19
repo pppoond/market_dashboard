@@ -42,16 +42,27 @@ $title = "Payments";
                 <p>จัดการการชำระเงิน</p>
                 <div class="row my-4">
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <div class="card cursor-poiter" id="buttonViewUsersAdmin">
-                            <h5 class="card-header">ร้าน</h5>
+
+                        <div class="card cursor-poiter" id="buttonPaymentStore">
+                            <h5 class="card-header">ถอนเงินร้าน</h5>
                             <div class="card-body">
                                 <h5 id="admin_count" class="card-title">0 รายการ</h5>
                             </div>
                         </div>
+
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                        <div class="card cursor-poiter" id="buttonViewUsersRider">
-                            <h5 class="card-header">ไรเดอร์</h5>
+                        <div class="card cursor-poiter" id="buttonPaymentRider">
+                            <h5 class="card-header">ถอนเงินไรเดอร์</h5>
+                            <div class="card-body">
+                                <h5 id="rider_count" class="card-title">0 รายการ</h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                        <div class="card cursor-poiter" id="buttonPaymentRider">
+                            <h5 class="card-header">เติมเครดิตไรเดอร์</h5>
                             <div class="card-body">
                                 <h5 id="rider_count" class="card-title">0 รายการ</h5>
 
@@ -76,14 +87,14 @@ $title = "Payments";
                 window.location.href = "./view_users_customer.php";
             });
 
-            $("#buttonViewUsersStore").on('click', function() {
+            $("#buttonPaymentStore").on('click', function() {
                 // console.log("/view_stores.php");
-                window.location.href = "./view_users_store.php";
+                window.location.href = "./view_payments_store.php";
             });
 
-            $("#buttonViewUsersRider").on('click', function() {
+            $("#buttonPaymentRider").on('click', function() {
                 // console.log("/view_stores.php");
-                window.location.href = "./view_users_rider.php";
+                window.location.href = "./view_payments_rider.php";
             });
 
             $("#buttonViewUsersAdmin").on('click', function() {
@@ -155,22 +166,6 @@ $title = "Payments";
                 }
             });
         }
-
-        // function getAdmin() {
-        //     $.ajax({
-        //         type: "GET",
-        //         dataType: "JSON",
-        //         url: "./api/customers.php",
-        //         data: {},
-        //         success: function(response) {
-        //             console.log(response.result.length);
-        //             $("#customer_count").html(`${response.result.length} คน`);
-        //         },
-        //         error: function(err) {
-        //             console.log("bad", err);
-        //         }
-        //     });
-        // }
     </script>
 </body>
 

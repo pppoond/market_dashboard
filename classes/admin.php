@@ -17,13 +17,15 @@ class Admin extends Database
     public function add(
         $username,
         $password,
-        $adminName,
-        $adminPhone
+        $admin_name,
+        $bank_name,
+        $account_name,
+        $no_bank_account
     ) {
         $md5Password = md5($password);
-        $sql = "INSERT INTO {$this->tableName} (username,password,admin_name,admin_phone) VALUES(?,?,?,?)";
+        $sql = "INSERT INTO {$this->tableName} (username,password,admin_name,bank_name,account_name,no_bank_account) VALUES(?,?,?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $md5Password, $adminName, $adminPhone]);
+        $stmt->execute([$username, $md5Password, $admin_name, $bank_name, $account_name, $no_bank_account]);
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }

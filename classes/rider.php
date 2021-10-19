@@ -42,27 +42,34 @@ class Rider extends Database
     }
     public function updateCreditWallet($rider_id, $credit, $wallet)
     {
-        $sql = "UPDATE rider SET credit = ? ,wallet = ? WHERE rider_id = ?";
+        $sql = "UPDATE {$this->tableName} SET credit = ? ,wallet = ? WHERE rider_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$credit, $wallet, $rider_id]);
         return $rider_id;
     }
+    public function updateWallet($rider_id, $wallet)
+    {
+        $sql = "UPDATE {$this->tableName} SET wallet = ? WHERE rider_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$wallet, $rider_id]);
+        return $rider_id;
+    }
     public function updateStatus($rider_id, $rider_status)
     {
-        $sql = "UPDATE rider SET rider_status = ? WHERE rider_id = ?";
+        $sql = "UPDATE {$this->tableName} SET rider_status = ? WHERE rider_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$rider_status, $rider_id]);
         return $rider_id;
     }
     public function delete($rider_id)
     {
-        $sql = "DELETE FROM rider WHERE rider_id = ?";
+        $sql = "DELETE FROM {$this->tableName} WHERE rider_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$rider_id]);
     }
     public function findById($rider_id)
     {
-        $sql = "SELECT * FROM rider WHERE rider_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$rider_id]);
         while ($result = $stmt->fetchAll()) {
@@ -71,7 +78,7 @@ class Rider extends Database
     }
     public function findByUsername($username)
     {
-        $sql = "SELECT * FROM rider WHERE username = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE username = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$username]);
         while ($result = $stmt->fetchAll()) {
@@ -80,7 +87,7 @@ class Rider extends Database
     }
     public function findByRiderStatus($rider_status)
     {
-        $sql = "SELECT * FROM rider WHERE rider_status = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_status = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$rider_status]);
         while ($result = $stmt->fetchAll()) {
@@ -90,7 +97,7 @@ class Rider extends Database
     public function loginRider($username, $password)
     {
         $md5Password = md5($password);
-        $sql = "SELECT * FROM rider WHERE username = ? AND password = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE username = ? AND password = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$username, $md5Password]);
         while ($result = $stmt->fetchAll()) {
