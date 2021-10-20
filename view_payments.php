@@ -52,7 +52,7 @@ $title = "Payments";
 
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                        <div class="card cursor-poiter" id="buttonPaymentRider">
+                        <div class="card cursor-poiter" id="buttonWithdrawRider">
                             <h5 class="card-header">ถอนเงินไรเดอร์</h5>
                             <div class="card-body">
                                 <h5 id="rider_count" class="card-title">0 รายการ</h5>
@@ -92,14 +92,14 @@ $title = "Payments";
                 window.location.href = "./view_payments_store.php";
             });
 
-            $("#buttonPaymentRider").on('click', function() {
+            $("#buttonWithdrawRider").on('click', function() {
                 // console.log("/view_stores.php");
                 window.location.href = "./view_payments_rider.php";
             });
 
-            $("#buttonViewUsersAdmin").on('click', function() {
+            $("#buttonPaymentRider").on('click', function() {
                 // console.log("/view_stores.php");
-                window.location.href = "./view_users_admin.php";
+                window.location.href = "./view_payments_rider_credit.php";
             });
         });
 
