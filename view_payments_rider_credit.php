@@ -42,15 +42,11 @@ $title = "Payments";
                             <h5 class="card-header d-flex justify-content-between">ไรเดอร์
 
                                 <div class="col-auto d-flex">
-                                    <div class="mr-1">
-                                        <button id="btnAddrider" class="btn btn btn-primary" data-toggle="modal" data-target="#addModalCenter">เพิ่ม</button>
-                                    </div>
-
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">ค้นหา</div>
                                         </div>
-                                        <input id="find_rider_username" type="text" class="form-control" id="inlineFormInputGroup" placeholder="username...">
+                                        <input id="find_rider_id" type="text" class="form-control" id="inlineFormInputGroup" placeholder="rider_id...">
                                     </div>
                                 </div>
                             </h5>
@@ -132,6 +128,8 @@ $title = "Payments";
         </div>
     </div>
 
+
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenterrider" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterriderTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -143,6 +141,9 @@ $title = "Payments";
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="pb-3">
+                        <img src="" id="image_from_rider_url" width="50%">
+                    </div>
                     <div class="pb-3">
                         <label for="input_rider_id">ID</label>
                         <input type="text" class="form-control" id="input_rider_id" disabled>
@@ -209,9 +210,14 @@ $title = "Payments";
                 renderPaymentRider();
             }
 
-            $('#find_rider_username').change(function() {
+            $('#find_rider_id').change(function() {
                 console.log('change');
-                findByUsername();
+                if ($("#find_rider_id").val() != '') {
+                    findByRiderId();
+                } else {
+                    renderPaymentRider();
+                }
+
             });
 
             $('#btnAddrider').on('click', function() {
@@ -261,7 +267,60 @@ $title = "Payments";
                          <td>${pay_status}</td>
                          <td>
                             <button onclick="confirm_delete(${data[i].pay_rider_id})" class="btn btn btn-danger">ลบ</button>
-                            <button onclick="open_modal_edit(${i}, ${data[i].pay_rider_id})" class="btn btn btn-warning" data-toggle="modal" data-target="#exampleModalCenterPayment">แก้ไข</button>
+                            <button onclick="open_modal_edit(${i}, ${data[i].pay_rider_id})" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenterPayment">รายละเอียด</button>
+                        </td>
+                    </tr>
+                `
+                    }
+                    $("#tbodypayrider").html(html);
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            });
+        }
+
+        function findByRiderId() {
+            console.log('change');
+            console.log("find_by_rider_id");
+            html = '';
+            var riderId = $("#find_rider_id").val();
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: `./api/payment_riders.php?rider_id=${riderId}`,
+                success: function(response) {
+                    // console.log("good", response);
+                    data = response.result;
+                    console.log(data);
+
+                    for (var i = 0; i < data.length; i++) {
+                        var pay_status = ``;
+                        if (data[i].pay_status == '0') {
+                            pay_status = `
+                            <button onclick="confirm_payment(${data[i].pay_rider_id})" class="btn btn btn-warning">รอตรวจสอบ</button>
+                            `;
+                        } else if (data[i].pay_status == '1') {
+                            pay_status = `
+                            <button onclick="confirm_payment(${data[i].pay_rider_id})" class="btn btn btn-success">สำเร็จ</button>
+                            `;
+                        } else {
+                            pay_status = `
+                            <button onclick="confirm_payment(${data[i].pay_rider_id})" class="btn btn btn-mute">ยกเลิก</button>
+                            `;
+                        }
+                        html += `
+                    <tr>
+                         <th scope="row">${i + 1}</th>
+                         <td>${data[i].pay_rider_id}</td>
+                         <td><a class="btn btn-primary" onclick="open_modal_rider(${i}, ${data[i].rider_id.rider_id})" data-toggle="modal" data-target="#exampleModalCenterrider">${data[i].rider_id.rider_id}</a></td>
+                         <td>${data[i].total}</td>
+                         <td>${data[i].bank_name}</td>
+                         <td>${data[i].account_name}</td>
+                         <td>${data[i].no_bank_account}</td>
+                         <td>${pay_status}</td>
+                         <td>
+                            <button onclick="confirm_delete(${data[i].pay_rider_id})" class="btn btn btn-danger">ลบ</button>
                             <button onclick="open_modal_edit(${i}, ${data[i].pay_rider_id})" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModalCenterPayment">รายละเอียด</button>
                         </td>
                     </tr>
@@ -290,6 +349,7 @@ $title = "Payments";
         var id_rider;
 
         function open_modal_rider(index, rider_id) {
+            $("#image_from_rider_url").attr("src", `./api/uploads/profiles/${data[index].rider_id.profile_image}`);
             $("#input_rider_id").val(data[index].rider_id.rider_id);
             $("#input_rider_username").val(data[index].rider_id.username);
             $("#input_rider_password").val(data[index].rider_id.password);
@@ -387,12 +447,12 @@ $title = "Payments";
                 .then((willDelete) => {
                     if (willDelete) {
                         console.log(pay_rider_id);
-                        deleteWithdraw(pay_rider_id);
+                        deletePaymentRider(pay_rider_id);
                     } else {}
                 });
         }
 
-        function deleteWithdraw(pay_rider_id) {
+        function deletePaymentRider(pay_rider_id) {
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
@@ -429,12 +489,12 @@ $title = "Payments";
                 .then((willDelete) => {
                     if (willDelete) {
                         console.log(pay_rider_id);
-                        updateWithdraw();
+                        updatePaymentRider();
                     } else {}
                 });
         }
 
-        function updateWithdraw() {
+        function updatePaymentRider() {
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
@@ -444,6 +504,7 @@ $title = "Payments";
                     'rider_id': $("#input_payment_rider_id").val(),
                     'total': $("#input_payment_total").val(),
                     'bank_name': $("#input_payment_bank_name").val(),
+                    'account_name': $("#input_payment_account_name").val(),
                     'no_bank_account': $("#input_payment_no_bank_account").val(),
                 },
                 success: function(response) {

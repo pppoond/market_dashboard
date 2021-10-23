@@ -1,29 +1,21 @@
 <?php
 header('Content-Type: application/json;charset=utf-8');
-require '../classes/store.php';
+require '../classes/post.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $store_phone = $_POST['store_phone'];
-    $store_name = $_POST['store_name'];
-    if (isset($username)) {
-        $store = new Store();
-        $result = $store->add(
-            $email,
-            $username,
-            $password,
-            $store_phone,
-            $store_name
-        );
+
+    $post_id = $_POST['post_id'];
+    if (isset($post_id)) {
+        $post = new Post();
+        $result = $post->delete($post_id);
 
         $lastId = [
-            "store_id" => $result
+            "post_id" => $result
         ];
 
         $result = [
+            'title' => "delete",
             'msg' => "success",
             'status' => 200,
             'result' => $lastId,

@@ -23,19 +23,20 @@ class PaymentRider extends Database
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
-    public function update($wd_payment_rider_id, $payment_rider_id, $total, $bank_name, $no_bank_account)
+    public function update($pay_rider_id, $rider_id, $total, $bank_name, $account_name, $no_bank_account)
     {
 
-        $sql = "UPDATE {$this->tableName} SET payment_rider_id = :payment_rider_id ,total = :total ,bank_name = :bank_name ,no_bank_account = :no_bank_account WHERE wd_payment_rider_id = :wd_payment_rider_id";
+        $sql = "UPDATE {$this->tableName} SET rider_id = :rider_id ,total = :total ,bank_name = :bank_name ,account_name = :account_name ,no_bank_account = :no_bank_account WHERE pay_rider_id = :pay_rider_id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':payment_rider_id', $payment_rider_id, PDO::PARAM_STR);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
         $stmt->bindParam(':total', $total, PDO::PARAM_STR);
         $stmt->bindParam(':bank_name', $bank_name, PDO::PARAM_STR);
+        $stmt->bindParam(':account_name', $account_name, PDO::PARAM_STR);
         $stmt->bindParam(':no_bank_account', $no_bank_account, PDO::PARAM_STR);
-        $stmt->bindParam(':wd_payment_rider_id', $wd_payment_rider_id, PDO::PARAM_STR);
+        $stmt->bindParam(':pay_rider_id', $pay_rider_id, PDO::PARAM_STR);
 
         $stmt->execute();
-        return $wd_payment_rider_id;
+        return $pay_rider_id;
     }
     public function updatePayStatus($pay_rider_id, $pay_status)
     {
@@ -55,7 +56,7 @@ class PaymentRider extends Database
     }
     public function findById($pay_rider_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE pay_rider_id = ?  ORDER BY pay_rider_id ASC";
+        $sql = "SELECT * FROM {$this->tableName} WHERE pay_rider_id = ?  ORDER BY pay_rider_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$pay_rider_id]);
         while ($result = $stmt->fetchAll()) {
@@ -64,7 +65,7 @@ class PaymentRider extends Database
     }
     public function findBypayment_riderId($rider_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = ?  ORDER BY pay_rider_id ASC";
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = ?  ORDER BY pay_rider_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$rider_id]);
         while ($result = $stmt->fetchAll()) {

@@ -7,7 +7,7 @@ class WithdrawStore extends Database
     protected $tableName = 'withdraw_store';
     public function withdraw_stores()
     {
-        $sql = "SELECT * FROM withdraw_store";
+        $sql = "SELECT * FROM withdraw_store ORDER BY wd_store_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {
@@ -55,7 +55,7 @@ class WithdrawStore extends Database
     }
     public function findById($wd_store_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE wd_store_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE wd_store_id = ? ORDER BY wd_store_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$wd_store_id]);
         while ($result = $stmt->fetchAll()) {
@@ -64,7 +64,7 @@ class WithdrawStore extends Database
     }
     public function findByStoreId($store_id)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = ?";
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = ? ORDER BY wd_store_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$store_id]);
         while ($result = $stmt->fetchAll()) {

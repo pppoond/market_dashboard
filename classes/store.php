@@ -14,13 +14,13 @@ class Store extends Database
             return $result;
         };
     }
-    public function add($username, $password, $store_phone, $store_name)
+    public function add($email, $username, $password, $store_phone, $store_name)
     {
         $md5Password = md5($password);
 
-        $sql = "INSERT INTO {$this->tableName} (username, password, store_phone, store_name) VALUES(?,?,?,?)";
+        $sql = "INSERT INTO {$this->tableName} (email,username, password, store_phone, store_name) VALUES(?,?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username, $md5Password, $store_phone, $store_name]);
+        $stmt->execute([$email, $username, $md5Password, $store_phone, $store_name]);
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }

@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $results = $store->findById($_GET['findid']);
         foreach ($results as $result) {
             $store_id = $result['store_id'];
+            $email = $result['email'];
             $username = $result['username'];
             $password = $result['password'];
             $store_name = $result['store_name'];
@@ -23,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $time_reg = $result['time_reg'];
             $data_items = array(
                 "store_id" => $store_id,
+                "email" => $email,
                 "username" => $username,
                 "password" => $password,
                 "store_name" => $store_name,
@@ -40,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $results = $store->findByUsername($_GET['find_username']);
         foreach ($results as $result) {
             $store_id = $result['store_id'];
+            $email = $result['email'];
             $username = $result['username'];
             $password = $result['password'];
             $store_name = $result['store_name'];
@@ -52,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $time_reg = $result['time_reg'];
             $data_items = array(
                 "store_id" => $store_id,
+                "email" => $email,
                 "username" => $username,
                 "password" => $password,
                 "store_name" => $store_name,
@@ -69,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $results = $store->stores();
         foreach ($results as $result) {
             $store_id = $result['store_id'];
+            $email = $result['email'];
             $username = $result['username'];
             $password = $result['password'];
             $store_name = $result['store_name'];
@@ -81,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $time_reg = $result['time_reg'];
             $data_items = array(
                 "store_id" => $store_id,
+                "email" => $email,
                 "username" => $username,
                 "password" => $password,
                 "store_name" => $store_name,
@@ -99,54 +105,44 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     http_response_code(200);
     exit();
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $storeName = $_POST['store_name'];
-    $storePhone = $_POST['store_phone'];
-    if (isset($username) && isset($password) && isset($storeName) && isset($storePhone)) {
+    $store_phone = $_POST['store_phone'];
+    $store_name = $_POST['store_name'];
+    if (isset($username)) {
         $store = new Store();
-        $result = $store->add($username, $password, $storePhone, $storeName);
+        $result = $store->add(
+            $email,
+            $username,
+            $password,
+            $store_phone,
+            $store_name
+        );
 
         $lastId = [
-            "store_id" => (int)$result
+            "store_id" => $result
         ];
 
-        $data_arr = [
+        $result = [
             'msg' => "success",
             'status' => 200,
             'result' => $lastId,
         ];
 
-        echo json_encode($data_arr);
+        echo json_encode($result);
         http_response_code(200);
         exit();
     } else {
-        $data_arr = [
+        $result = [
             'msg' => "unsuccess",
             'status' => 200,
         ];
-        echo json_encode($data_arr);
+        echo json_encode($result);
         http_response_code(200);
         exit();
     }
-} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = $_REQUEST['username'];
-    $password = $_REQUEST['password'];
-    $store_name = $_REQUEST['store_name'];
-    $store_phone = $_REQUEST['store_phone'];
-    // $profile_image = $_REQUEST['profile_image'];
-    // $wallet = $_REQUEST['wallet'];
-    // $lat = $_REQUEST['lat'];
-    // $lng = $_REQUEST['lng'];
 } else {
-    $username = $_REQUEST['username'];
-    $password = $_REQUEST['password'];
-    $store_name = $_REQUEST['store_name'];
-    $store_phone = $_REQUEST['store_phone'];
-    $profile_image = $_REQUEST['profile_image'];
-    $wallet = $_REQUEST['wallet'];
-    $lat = $_REQUEST['lat'];
-    $lng = $_REQUEST['lng'];
 
     http_response_code(405);
 }

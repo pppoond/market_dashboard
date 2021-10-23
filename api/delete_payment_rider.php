@@ -1,29 +1,21 @@
 <?php
 header('Content-Type: application/json;charset=utf-8');
-require '../classes/store.php';
+require '../classes/payment_rider.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $store_phone = $_POST['store_phone'];
-    $store_name = $_POST['store_name'];
-    if (isset($username)) {
-        $store = new Store();
-        $result = $store->add(
-            $email,
-            $username,
-            $password,
-            $store_phone,
-            $store_name
-        );
+
+    $pay_rider_id = $_POST['pay_rider_id'];
+    if (isset($pay_rider_id)) {
+        $payment_rider = new PaymentRider();
+        $result = $payment_rider->delete($pay_rider_id);
 
         $lastId = [
-            "store_id" => $result
+            "pay_rider_id" => $result
         ];
 
         $result = [
+            'title' => "delete",
             'msg' => "success",
             'status' => 200,
             'result' => $lastId,

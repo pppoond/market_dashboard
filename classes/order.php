@@ -47,6 +47,42 @@ class Order extends Database
             return $result;
         };
     }
+
+    public function ordersByStoreStatus($store_id, $status)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id AND status = :status ORDER BY order_id DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+
+    public function ordersByStoreStatusDateToday($store_id, $status, $order_date)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id AND status = :status AND order_date = :order_date ORDER BY order_id DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+    public function ordersByStoreDate($store_id, $order_date)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id AND order_date = :order_date ORDER BY order_id DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
     public function ordersByCustomer($customer_id)
     {
         $sql = "SELECT * FROM {$this->tableName} WHERE customer_id = :customer_id  ORDER BY order_id DESC";

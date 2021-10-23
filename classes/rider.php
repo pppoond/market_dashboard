@@ -14,14 +14,12 @@ class Rider extends Database
             return $result;
         };
     }
-    public function add($name, $category, $password)
+    public function add($email, $username, $password, $rider_phone, $rider_name)
     {
         $md5Password = md5($password);
-        $sql = "INSERT INTO {$this->tableName} (name,category) VALUES(:name,:category)";
+        $sql = "INSERT INTO {$this->tableName} (email,username,password,rider_phone,rider_name) VALUES(?,?,?,?,?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-        $stmt->bindParam(':category', $category, PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->execute([$email, $username, $md5Password, $rider_phone, $rider_name]);
         $lastInsertedId = $this->conn->lastInsertId();
         return $lastInsertedId;
     }
