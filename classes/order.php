@@ -38,10 +38,22 @@ class Order extends Database
     }
     public function ordersByStatus($rider_id, $status)
     {
-        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = 4 ORDER BY order_id DESC LIMIT 1";
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id ORDER BY order_id DESC LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
         // $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+
+    public function ordersByRiderStatus($rider_id, $status)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id AND status = :status ORDER BY order_id DESC LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {
             return $result;
@@ -72,11 +84,34 @@ class Order extends Database
             return $result;
         };
     }
+    public function ordersByRiderStatusDateToday($rider_id, $status, $order_date)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id AND status = :status AND order_date = :order_date ORDER BY order_id DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
     public function ordersByStoreDate($store_id, $order_date)
     {
         $sql = "SELECT * FROM {$this->tableName} WHERE store_id = :store_id AND order_date = :order_date ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
+        $stmt->execute();
+        while ($result = $stmt->fetchAll()) {
+            return $result;
+        };
+    }
+    public function ordersByRiderDate($rider_id, $order_date)
+    {
+        $sql = "SELECT * FROM {$this->tableName} WHERE rider_id = :rider_id AND order_date = :order_date ORDER BY order_id DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
         $stmt->bindParam(':order_date', $order_date, PDO::PARAM_STR);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {
@@ -132,6 +167,16 @@ class Order extends Database
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':status', $order_status, PDO::PARAM_STR);
+        $stmt->bindParam(':order_id', $order_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $order_id;
+    }
+    public function updateRiderId($order_id, $rider_id)
+    {
+        $sql = "UPDATE {$this->tableName} SET rider_id = :rider_id WHERE order_id = :order_id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':rider_id', $rider_id, PDO::PARAM_STR);
         $stmt->bindParam(':order_id', $order_id, PDO::PARAM_STR);
         $stmt->execute();
         return $order_id;

@@ -59,6 +59,13 @@ class Rider extends Database
         $stmt->execute([$rider_status, $rider_id]);
         return $rider_id;
     }
+    public function updateLatLng($rider_id, $lat, $lng)
+    {
+        $sql = "UPDATE {$this->tableName} SET lat = ?,lng = ? WHERE rider_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$lat, $lng, $rider_id]);
+        return $rider_id;
+    }
     public function delete($rider_id)
     {
         $sql = "DELETE FROM {$this->tableName} WHERE rider_id = ?";
