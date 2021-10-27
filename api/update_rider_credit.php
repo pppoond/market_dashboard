@@ -1,18 +1,15 @@
 <?php
 header('Content-Type: application/json;charset=utf-8');
-require '../classes/withdraw_store.php';
+require '../classes/rider.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $wd_store_id = $_REQUEST['wd_store_id'];
-    $pay_status = $_REQUEST['pay_status'];
-    $withdraw_store = new WithdrawStore();
-    if (isset($_REQUEST['wd_store_id'])) {
-        $updateReturn =  $withdraw_store->updatePayStatus(
-            $wd_store_id,
-            $pay_status
-        );
+    $rider_id = $_REQUEST['rider_id'];
+    $credit = $_REQUEST['credit'];
+    $rider = new rider();
+    if (isset($_REQUEST['rider_id']) && isset($_REQUEST['credit'])) {
+        $updateReturn =  $rider->updateCredit($rider_id, $credit);
         $lastId = [
-            "wd_store_id" => $updateReturn
+            "rider_id" => $updateReturn
         ];
 
         $result = [

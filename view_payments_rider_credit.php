@@ -34,7 +34,7 @@ $title = "Payments";
                         <li class="breadcrumb-item active" aria-current="page">rider</li>
                     </ol>
                 </nav>
-                <h1 class="h2">การตำเติมเครดิต</h1>
+                <h1 class="h2">การจัดการเติมเครดิต</h1>
                 <p>จัดการเติมเครดิตไรเดอร์</p>
                 <div class="row">
                     <div class="col-12 col-xl-12 mb-4 mb-lg-0">

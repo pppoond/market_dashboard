@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -280,7 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -296,7 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -414,7 +414,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -430,7 +430,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -548,7 +548,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -564,7 +564,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -682,7 +682,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -698,7 +698,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -816,7 +816,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -832,7 +832,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -950,7 +950,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -966,7 +966,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -1084,7 +1084,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -1100,7 +1100,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -1218,7 +1218,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -1234,7 +1234,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -1352,7 +1352,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }
@@ -1368,7 +1368,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $total = $result['total'];
             $cash_method = $result['cash_method'];
             $order_status = $result['status'];
-            $time_reg = $result['time_reg'];
+            $time_reg_order = $result['time_reg'];
 
             $store_item = array();
             $result_stores = $store->findById($store_id);
@@ -1486,7 +1486,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 "total" => $total,
                 "cash_method" => $cash_method,
                 "status" => $order_status,
-                "time_reg" => $time_reg,
+                "time_reg" => $time_reg_order,
             );
             array_push($data_arr['result'], $data_items);
         }

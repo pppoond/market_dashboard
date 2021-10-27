@@ -11,16 +11,11 @@
         <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
     </div>
     <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-        <div class="mr-3 mt-1">
-            <a class="github-button" href="https://github.com/themesberg/simple-bootstrap-5-dashboard" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">Star</a>
-        </div>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
                 Siwat Laothong
             </button>
             <ul class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li class=""><a class="dropdown-item text-danger" href="./logout.php">Sign out</a></li>
             </ul>
         </div>

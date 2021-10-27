@@ -7,7 +7,7 @@ class Product extends Database
     protected $tableName = 'products';
     public function products()
     {
-        $sql = "SELECT * FROM {$this->tableName}";
+        $sql = "SELECT * FROM {$this->tableName} ORDER BY product_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {

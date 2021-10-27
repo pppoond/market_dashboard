@@ -57,6 +57,15 @@ class Store extends Database
         $stmt->execute();
         return $store_id;
     }
+    public function updateWallet($store_id, $wallet)
+    {
+        $sql = "UPDATE {$this->tableName} SET wallet = :wallet WHERE store_id = :store_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':wallet', $wallet, PDO::PARAM_STR);
+        $stmt->bindParam(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->execute();
+        return $store_id;
+    }
     public function updateLatLng($store_id, $lat, $lng)
     {
         $sql = "UPDATE {$this->tableName} SET lat = :lat, lng = :lng WHERE store_id = :store_id";

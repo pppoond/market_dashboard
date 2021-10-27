@@ -1,18 +1,19 @@
 <?php
 header('Content-Type: application/json;charset=utf-8');
-require '../classes/withdraw_store.php';
+require '../classes/store.php';
+require '../classes/product.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $wd_store_id = $_REQUEST['wd_store_id'];
-    $pay_status = $_REQUEST['pay_status'];
-    $withdraw_store = new WithdrawStore();
-    if (isset($_REQUEST['wd_store_id'])) {
-        $updateReturn =  $withdraw_store->updatePayStatus(
-            $wd_store_id,
-            $pay_status
+    $store_id = $_REQUEST['store_id'];
+    $wallet = $_REQUEST['wallet'];
+    $store = new Store();
+    if (isset($_REQUEST['store_id'])) {
+        $updateReturn =  $store->updateWallet(
+            $store_id,
+            $wallet
         );
         $lastId = [
-            "wd_store_id" => $updateReturn
+            "store_id" => $updateReturn
         ];
 
         $result = [

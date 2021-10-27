@@ -61,7 +61,7 @@
                                     if ($title == "Reports") {
                                         echo "active";
                                     }
-                                    ?>" id="Reports">
+                                    ?>" id="Reports" href="./view_report.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
                         <line x1="18" y1="20" x2="18" y2="10"></line>
                         <line x1="12" y1="20" x2="12" y2="4"></line>
@@ -76,10 +76,11 @@
                                         echo "active";
                                     }
                                     ?>" id="buttonViewPayments" href="./view_payments.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                        <g fill="none">
+                            <path d="M10.5 10a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" fill="currentColor" />
+                            <path d="M1 5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5zm13 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1h12V5zM2 11a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7H2v4z" fill="currentColor" />
+                        </g>
                     </svg>
                     <span class="ml-2">Payments</span>
                 </a>

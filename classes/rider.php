@@ -52,6 +52,13 @@ class Rider extends Database
         $stmt->execute([$wallet, $rider_id]);
         return $rider_id;
     }
+    public function updateCredit($rider_id, $credit)
+    {
+        $sql = "UPDATE {$this->tableName} SET credit = ? WHERE rider_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$credit, $rider_id]);
+        return $rider_id;
+    }
     public function updateStatus($rider_id, $rider_status)
     {
         $sql = "UPDATE {$this->tableName} SET rider_status = ? WHERE rider_id = ?";

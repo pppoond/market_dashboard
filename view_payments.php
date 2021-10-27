@@ -46,7 +46,7 @@ $title = "Payments";
                         <div class="card cursor-poiter" id="buttonPaymentStore">
                             <h5 class="card-header">ถอนเงินร้าน</h5>
                             <div class="card-body">
-                                <h5 id="admin_count" class="card-title">0 รายการ</h5>
+                                <div id="count_withdraw_store"></div>
                             </div>
                         </div>
 
@@ -55,7 +55,7 @@ $title = "Payments";
                         <div class="card cursor-poiter" id="buttonWithdrawRider">
                             <h5 class="card-header">ถอนเงินไรเดอร์</h5>
                             <div class="card-body">
-                                <h5 id="rider_count" class="card-title">0 รายการ</h5>
+                                <div id="count_withdraw_rider"></div>
 
                             </div>
                         </div>
@@ -64,7 +64,7 @@ $title = "Payments";
                         <div class="card cursor-poiter" id="buttonPaymentRider">
                             <h5 class="card-header">เติมเครดิตไรเดอร์</h5>
                             <div class="card-body">
-                                <h5 id="rider_count" class="card-title">0 รายการ</h5>
+                                <div id="count_payment_rider"></div>
 
                             </div>
                         </div>
@@ -82,6 +82,9 @@ $title = "Payments";
     <script>
         $(document).ready(function() {
             console.log('Payments');
+            $("#count_withdraw_store").html(`<h5 id="admin_count" class="card-title">0 รายการ</h5>`);
+            $("#count_withdraw_rider").html(`<h5 id="admin_count" class="card-title">0 รายการ</h5>`);
+            $("#count_payment_rider").html(`<h5 id="admin_count" class="card-title">0 รายการ</h5>`);
             $("#buttonViewUsersCustomer").on('click', function() {
                 // console.log("/view_stores.php");
                 window.location.href = "./view_users_customer.php";
@@ -101,6 +104,9 @@ $title = "Payments";
                 // console.log("/view_stores.php");
                 window.location.href = "./view_payments_rider_credit.php";
             });
+            getWithdrawRider();
+            getWithdrawStore();
+            getPaymentRider();
         });
 
         function getCustomer() {
@@ -111,7 +117,7 @@ $title = "Payments";
                 data: {},
                 success: function(response) {
                     console.log(response.result.length);
-                    $("#customer_count").html(`${response.result.length} คน`);
+                    $("#count_payment_rider").html(`<h5 id="admin_count" class="card-title">${response.result.length} รายการ</h5>`);
                 },
                 error: function(err) {
                     console.log("bad", err);
@@ -119,15 +125,47 @@ $title = "Payments";
             });
         }
 
-        function getRider() {
+        function getPaymentRider() {
             $.ajax({
                 type: "GET",
                 dataType: "JSON",
-                url: "./api/riders.php",
+                url: "./api/payment_riders.php",
                 data: {},
                 success: function(response) {
                     console.log(response.result.length);
-                    $("#rider_count").html(`${response.result.length} คน`);
+                    $("#count_payment_rider").html(`<h5 id="admin_count" class="card-title">${response.result.length} รายการ</h5>`);
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            });
+        }
+
+        function getWithdrawRider() {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: "./api/withdraw_riders.php",
+                data: {},
+                success: function(response) {
+                    console.log(response.result.length);
+                    $("#count_withdraw_rider").html(`<h5 id="admin_count" class="card-title">${response.result.length} รายการ</h5>`);
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            });
+        }
+
+        function getWithdrawStore() {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: "./api/withdraw_stores.php",
+                data: {},
+                success: function(response) {
+                    console.log(response.result.length);
+                    $("#count_withdraw_store").html(`<h5 id="admin_count" class="card-title">${response.result.length} รายการ</h5>`);
                 },
                 error: function(err) {
                     console.log("bad", err);
@@ -143,7 +181,7 @@ $title = "Payments";
                 data: {},
                 success: function(response) {
                     console.log(response.result.length);
-                    $("#admin_count").html(`${response.result.length} คน`);
+                    $("#count_payment_rider").html(`<h5 id="admin_count" class="card-title">${response.result.length} รายการ</h5>`);
                 },
                 error: function(err) {
                     console.log("bad", err);
@@ -159,7 +197,7 @@ $title = "Payments";
                 data: {},
                 success: function(response) {
                     console.log(response.result.length);
-                    $("#store_count").html(`${response.result.length} คน`);
+                    $("#count_withdraw_store").html(`<h5 id="admin_count" class="card-title">${response.result.length} รายการ</h5>`);
                 },
                 error: function(err) {
                     console.log("bad", err);

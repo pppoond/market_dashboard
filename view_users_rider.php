@@ -34,8 +34,8 @@ $title = "Rider";
                         <li class="breadcrumb-item active" aria-current="page">riders</li>
                     </ol>
                 </nav>
-                <h1 class="h2">ลูกค้า</h1>
-                <p>จัดการลูกค้า</p>
+                <h1 class="h2">ไรเดอร์</h1>
+                <p>จัดการไรเดอร์</p>
                 <div class="row">
                     <div class="col-12 col-xl-12 mb-4 mb-lg-0">
                         <div class="card">
