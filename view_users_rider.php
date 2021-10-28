@@ -94,6 +94,9 @@ $title = "Rider";
                 </div>
                 <div class="modal-body">
                     <div class="pb-3">
+                        <img src="" id="image_from_rider_url" width="50%">
+                    </div>
+                    <div class="pb-3">
                         <label for="input_rider_id">ID</label>
                         <input type="text" class="form-control" id="input_rider_id" disabled>
                     </div>
@@ -116,7 +119,7 @@ $title = "Rider";
                     </div>
                     <div class="pb-3">
                         <label for="input_rider_profile_image">โปรไฟล์</label>
-                        <input type="number" class="form-control" id="input_rider_profile_image">
+                        <input type="text" class="form-control" id="input_rider_profile_image">
                     </div>
                     <div class="pb-3">
                         <label for="input_rider_wallet">วอลเลต</label>
@@ -134,7 +137,7 @@ $title = "Rider";
                     </div>
                     <div class="pb-3">
                         <label for="input_rider_status">status</label>
-                        <input type="number" class="form-control" id="input_rider_status">
+                        <input type="text" class="form-control" id="input_rider_status">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -156,20 +159,24 @@ $title = "Rider";
                 </div>
                 <div class="modal-body">
                     <div class="pb-3">
+                        <label for="add_input_rider_email">Email</label>
+                        <input type="text" class="form-control" id="add_input_rider_email" placeholder="Email">
+                    </div>
+                    <div class="pb-3">
                         <label for="add_input_rider_username">ชื่อผู้ใช้</label>
-                        <input type="text" class="form-control" id="add_input_rider_username">
+                        <input type="text" class="form-control" id="add_input_rider_username" placeholder="Username">
                     </div>
                     <div class="pb-3">
                         <label for="add_input_rider_password">รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="add_input_rider_password">
+                        <input type="password" class="form-control" id="add_input_rider_password" placeholder="Password">
                     </div>
                     <div class="pb-3">
                         <label for="add_input_rider_name">ชื่อ</label>
-                        <input type="text" class="form-control" id="add_input_rider_name">
+                        <input type="text" class="form-control" id="add_input_rider_name" placeholder="Name">
                     </div>
                     <div class="pb-3">
                         <label for="add_input_rider_phone">มือถือ</label>
-                        <input type="number" class="form-control" id="add_input_rider_phone">
+                        <input type="number" class="form-control" id="add_input_rider_phone" placeholder="Phone">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -246,16 +253,17 @@ $title = "Rider";
         var id_rider;
 
         function open_modal_edit(index, rider_id) {
+            $("#image_from_rider_url").attr("src", `./api/uploads/profiles/${data[index].profile_image}`);
             $("#input_rider_id").val(data[index].rider_id);
             $("#input_rider_username").val(data[index].username);
-            $("#input_rider_password").val(data[index].password);
+            // $("#input_rider_password").val(data[index].password);
             $("#input_rider_name").val(data[index].rider_name);
             $("#input_rider_phone").val(data[index].rider_phone);
             $("#input_rider_profile_image").val(data[index].profile_image);
             $("#input_rider_wallet").val(data[index].wallet);
             $("#input_rider_lat").val(data[index].lat);
             $("#input_rider_lng").val(data[index].lng);
-            $("#input_rider_status").val(data[index].status);
+            $("#input_rider_status").val(data[index].rider_status);
             id_rider = rider_id;
         }
 
@@ -413,8 +421,9 @@ $title = "Rider";
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
-                url: "./api/add_rider.php",
+                url: "./api/riders.php",
                 data: {
+                    'email': $("#add_input_rider_email").val(),
                     'username': $("#add_input_rider_username").val(),
                     'password': $("#add_input_rider_password").val(),
                     'rider_name': $("#add_input_rider_name").val(),

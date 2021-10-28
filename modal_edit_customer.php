@@ -10,6 +10,9 @@
             </div>
             <div class="modal-body">
                 <div class="pb-3">
+                    <img src="" id="image_from_customer_url" width="50%">
+                </div>
+                <div class="pb-3">
                     <label for="input_customer_id">ID</label>
                     <input type="text" class="form-control" id="input_customer_id" disabled>
                 </div>

@@ -7,7 +7,7 @@ class Rider extends Database
     protected $tableName = 'rider';
     public function riders()
     {
-        $sql = "SELECT * FROM rider";
+        $sql = "SELECT * FROM {$this->tableName} ORDER BY rider_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {

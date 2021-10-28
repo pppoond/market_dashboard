@@ -30,7 +30,7 @@ $title = "Payments";
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./index.php">หน้าแรก</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="./view_users.php">payments</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="./view_payments.php">payments</a></li>
                         <li class="breadcrumb-item active" aria-current="page">rider</li>
                     </ol>
                 </nav>
@@ -42,16 +42,16 @@ $title = "Payments";
                             <h5 class="card-header d-flex justify-content-between">ไรเดอร์
 
                                 <div class="col-auto d-flex">
-                                    <div class="mr-1">
+                                    <!-- <div class="mr-1">
                                         <button id="btnAddrider" class="btn btn btn-primary" data-toggle="modal" data-target="#addModalCenter">เพิ่ม</button>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="input-group">
+                                    <!-- <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">ค้นหา</div>
                                         </div>
                                         <input id="find_rider_username" type="text" class="form-control" id="inlineFormInputGroup" placeholder="username...">
-                                    </div>
+                                    </div> -->
                                 </div>
                             </h5>
                             <div class="card-body">

@@ -42,12 +42,12 @@ $title = "Payments";
                             <h5 class="card-header d-flex justify-content-between">ไรเดอร์
 
                                 <div class="col-auto d-flex">
-                                    <div class="input-group">
+                                    <!-- <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">ค้นหา</div>
                                         </div>
                                         <input id="find_rider_id" type="text" class="form-control" id="inlineFormInputGroup" placeholder="rider_id...">
-                                    </div>
+                                    </div> -->
                                 </div>
                             </h5>
                             <div class="card-body">

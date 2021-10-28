@@ -46,12 +46,12 @@ $title = "Orders";
                         <div class="card">
                             <h5 class="card-header d-flex justify-content-between">คำสั่งซื้อ
                                 <div class="col-auto">
-                                    <div class="input-group">
+                                    <!-- <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">ค้นหา</div>
                                         </div>
                                         <input id="find_customer_username" type="text" class="form-control" id="inlineFormInputGroup" placeholder="username...">
-                                    </div>
+                                    </div> -->
                                 </div>
                             </h5>
 

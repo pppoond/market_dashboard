@@ -43,7 +43,7 @@ $title = "Reports";
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">หน้าแรก</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">payments</li>
+                        <li class="breadcrumb-item active" aria-current="page">report</li>
                         <li class="breadcrumb-item active" aria-current="page">rider</li>
                     </ol>
                 </nav>

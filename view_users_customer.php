@@ -43,6 +43,10 @@ $title = "Users";
 
                                 <div class="col-auto">
                                     <div class="input-group">
+                                        <div class="mr-1">
+                                            <button id="btnAddrider" class="btn btn btn-primary" data-toggle="modal" data-target="#addModalCenter">เพิ่ม</button>
+                                        </div>
+
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">ค้นหา</div>
                                         </div>
@@ -109,7 +113,41 @@ $title = "Users";
     include_once "./include_footer.php";
     ?>
 
-
+    <!-- Modal -->
+    <div class="modal fade" id="addModalCenter" tabindex="-1" role="dialog" aria-labelledby="addModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">เพิ่ม</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="pb-3">
+                        <label for="add_input_customer_username">ชื่อผู้ใช้</label>
+                        <input type="text" class="form-control" id="add_input_customer_username" placeholder="Username">
+                    </div>
+                    <div class="pb-3">
+                        <label for="add_input_customer_password">รหัสผ่าน</label>
+                        <input type="password" class="form-control" id="add_input_customer_password" placeholder="Password">
+                    </div>
+                    <div class="pb-3">
+                        <label for="add_input_customer_name">ชื่อ</label>
+                        <input type="text" class="form-control" id="add_input_customer_name" placeholder="Name">
+                    </div>
+                    <div class="pb-3">
+                        <label for="add_input_customer_phone">มือถือ</label>
+                        <input type="number" class="form-control" id="add_input_customer_phone" placeholder="Phone">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmAddrider()">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     include_once "./modal_edit_customer.php";
     include_once "./include_js.php";
@@ -171,9 +209,10 @@ $title = "Users";
         var id_customer;
 
         function open_modal_edit(index, customer_id) {
+            $("#image_from_customer_url").attr("src", `./api/uploads/${data[index].profile_image}`);
             $("#input_customer_id").val(data[index].customer_id);
             $("#input_customer_username").val(data[index].username);
-            $("#input_customer_password").val(data[index].password);
+            // $("#input_customer_password").val(data[index].password);
             $("#input_customer_name").val(data[index].customer_name);
             $("#input_customer_phone").val(data[index].customer_phone);
             $("#input_customer_sex").val(data[index].sex).prop('selected', true);
@@ -252,20 +291,34 @@ $title = "Users";
         }
 
         function confirmUpdateCustomer() {
-            Swal.fire({
-                title: 'คุณต้องการบันทึกหรือไม่?',
-                text: "หากไม่ต้องการ กรุณากดยกเลิก!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'บันทึก',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    update_customer();
-                }
-            })
+            if (
+                $("#input_customer_id").val() != '' &&
+                $("#input_customer_username").val() != '' &&
+                $("#input_customer_password").val() != ''
+            ) {
+                Swal.fire({
+                    title: 'คุณต้องการบันทึกหรือไม่?',
+                    text: "หากไม่ต้องการ กรุณากดยกเลิก!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'บันทึก',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        update_customer();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'กรุณากรอกข้อมูลให้ครบ!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+
         }
 
         function deleteCustomer(customer_id) {
@@ -319,6 +372,72 @@ $title = "Users";
                     } else {
                         swal("มีข้อผิดพลาด!", {
                             icon: "error",
+                        });
+                    }
+                },
+                error: function(err) {
+                    console.log("bad", err);
+                }
+            })
+        }
+
+        function confirmAddcustomer() {
+            if (
+                $("#add_input_customer_username").val() != '' &&
+                $("#add_input_customer_password").val() != '' &&
+                $("#add_input_customer_name").val() != '' &&
+                $("#add_input_customer_phone").val() != ''
+            ) {
+                Swal.fire({
+                    title: 'คุณต้องการบันทึกหรือไม่?',
+                    text: "หากไม่ต้องการ กรุณากดยกเลิก!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#D5D8DC',
+                    confirmButtonText: 'บันทึก',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        addcustomer();
+                    }
+                })
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'กรุณากรอกข้อมูลให้ครบ!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+
+        function addcustomer() {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "./api/add_customer.php",
+                data: {
+                    'username': $("#add_input_customer_username").val(),
+                    'password': $("#add_input_customer_password").val(),
+                    'customer_name': $("#add_input_customer_name").val(),
+                    'customer_phone': $("#add_input_customer_phone").val(),
+                },
+                success: function(response) {
+                    if (response.msg == 'success') {
+                        renderCustomer();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'บันทึกสำเร็จ!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'มีข้อผิดพลาด!',
+                            showConfirmButton: false,
+                            timer: 1500
                         });
                     }
                 },

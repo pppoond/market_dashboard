@@ -7,7 +7,7 @@ class Customer extends Database
     protected $tableName = 'customer';
     public function customers()
     {
-        $sql = "SELECT * FROM customer";
+        $sql = "SELECT * FROM {$this->tableName} ORDER BY customer_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {

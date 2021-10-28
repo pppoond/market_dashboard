@@ -7,7 +7,7 @@ class Order extends Database
     protected $tableName = 'orders';
     public function orders()
     {
-        $sql = "SELECT * FROM {$this->tableName}";
+        $sql = "SELECT * FROM {$this->tableName} ORDER BY order_id DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         while ($result = $stmt->fetchAll()) {

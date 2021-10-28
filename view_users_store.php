@@ -94,6 +94,9 @@ $title = "Store";
                 </div>
                 <div class="modal-body">
                     <div class="pb-3">
+                        <img src="" id="image_from_store_url" width="50%">
+                    </div>
+                    <div class="pb-3">
                         <label for="input_store_id">ID</label>
                         <input type="text" class="form-control" id="input_store_id" disabled>
                     </div>
@@ -112,29 +115,29 @@ $title = "Store";
 
                     <div class="pb-3">
                         <label for="input_store_phone">มือถือ</label>
-                        <input type="number" class="form-control" id="input_store_phone">
+                        <input type="text" class="form-control" id="input_store_phone">
                     </div>
                     <div class="pb-3">
                         <label for="input_store_profile_image">โปรไฟล์</label>
-                        <input type="number" class="form-control" id="input_store_profile_image">
+                        <input type="text" class="form-control" id="input_store_profile_image">
                     </div>
                     <div class="pb-3">
                         <label for="input_store_wallet">วอลเลต</label>
-                        <input type="number" class="form-control" id="input_store_wallet">
+                        <input type="text" class="form-control" id="input_store_wallet">
                     </div>
                     <div class="d-flex">
                         <div class="pb-3">
                             <label for="input_store_lat">Latitude</label>
-                            <input type="number" class="form-control" id="input_store_lat">
+                            <input type="text" class="form-control" id="input_store_lat">
                         </div>
                         <div class="pb-3">
                             <label for="input_store_lng">Longtitude</label>
-                            <input type="number" class="form-control" id="input_store_lng">
+                            <input type="text" class="form-control" id="input_store_lng">
                         </div>
                     </div>
                     <div class="pb-3">
                         <label for="input_store_status">status</label>
-                        <input type="number" class="form-control" id="input_store_status">
+                        <input type="text" class="form-control" id="input_store_status">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -156,20 +159,24 @@ $title = "Store";
                 </div>
                 <div class="modal-body">
                     <div class="pb-3">
+                        <label for="add_input_store_email">Email</label>
+                        <input type="text" class="form-control" id="add_input_store_email" placeholder="Email">
+                    </div>
+                    <div class="pb-3">
                         <label for="add_input_store_username">ชื่อผู้ใช้</label>
-                        <input type="text" class="form-control" id="add_input_store_username">
+                        <input type="text" class="form-control" id="add_input_store_username" placeholder="Username">
                     </div>
                     <div class="pb-3">
                         <label for="add_input_store_password">รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="add_input_store_password">
+                        <input type="password" class="form-control" id="add_input_store_password" placeholder="Password">
                     </div>
                     <div class="pb-3">
                         <label for="add_input_store_name">ชื่อ</label>
-                        <input type="text" class="form-control" id="add_input_store_name">
+                        <input type="text" class="form-control" id="add_input_store_name" placeholder="Name">
                     </div>
                     <div class="pb-3">
                         <label for="add_input_store_phone">มือถือ</label>
-                        <input type="number" class="form-control" id="add_input_store_phone">
+                        <input type="number" class="form-control" id="add_input_store_phone" placeholder="Phone">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -246,9 +253,10 @@ $title = "Store";
         var id_store;
 
         function open_modal_edit(index, store_id) {
+            $("#image_from_store_url").attr("src", `./api/uploads/profiles/${data[index].profile_image}`);
             $("#input_store_id").val(data[index].store_id);
             $("#input_store_username").val(data[index].username);
-            $("#input_store_password").val(data[index].password);
+            // $("#input_store_password").val(data[index].password);
             $("#input_store_name").val(data[index].store_name);
             $("#input_store_phone").val(data[index].store_phone);
             $("#input_store_profile_image").val(data[index].profile_image);
@@ -332,20 +340,34 @@ $title = "Store";
         }
 
         function confirmUpdatestore() {
-            Swal.fire({
-                title: 'คุณต้องการบันทึกหรือไม่?',
-                text: "หากไม่ต้องการ กรุณากดยกเลิก!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#D5D8DC',
-                confirmButtonText: 'บันทึก',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    update_store();
-                }
-            })
+            if (
+                $("#input_store_id").val() != '' &&
+                $("#input_store_username").val() != '' &&
+                $("#input_store_password").val() != ''
+            ) {
+                Swal.fire({
+                    title: 'คุณต้องการบันทึกหรือไม่?',
+                    text: "หากไม่ต้องการ กรุณากดยกเลิก!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#D5D8DC',
+                    confirmButtonText: 'บันทึก',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        update_store();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'กรุณากรอกข้อมูลให้ครบ!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+
         }
 
         function deletestore(store_id) {
@@ -415,6 +437,7 @@ $title = "Store";
                 dataType: "JSON",
                 url: "./api/add_store.php",
                 data: {
+                    'email': $("#add_input_store_email").val(),
                     'username': $("#add_input_store_username").val(),
                     'password': $("#add_input_store_password").val(),
                     'store_name': $("#add_input_store_name").val(),
